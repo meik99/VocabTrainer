@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-heading active">Schultyp</a>
+        <a class="list-group-item" *ngFor="let typ of schooltypes" (click)="selectedSchooltype = typ.id">
+
+            {{typ.name}}
+
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <li class="list-group-item list-group-item-heading active">HTL - Jahrgang</li>
+      <li class="list-group-item disabled">1. Jahrgang</li>
+      <li class="list-group-item">2. Jahrgang</li>
+    </div>
+    <div class="col-md-2">
+      <li class="list-group-item list-group-item-heading active">1. Jahrgang - Ausgangssprache</li>
+      <li class="list-group-item">Deutsch</li>
+      <li class="list-group-item">Englisch</li>
+      <li class="list-group-item disabled">Spanisch</li>
+    </div>
+    <div class="col-md-2">
+      <li class="list-group-item list-group-item-heading active">1. Jahrgang - Fremdsprache</li>
+      <li class="list-group-item">Deutsch</li>
+      <li class="list-group-item disabled">Englisch</li>
+      <li class="list-group-item disabled">Spanisch</li>
+    </div>
+    <div class="col-md-2">
+      <li class="list-group-item list-group-item-heading active">Spanisch : Englisch - Einheit</li>
+      <li class="list-group-item">Unit 1</li>
+      <li class="list-group-item disabled">Unit 2</li>
+    </div>
+  </div>
+</div>

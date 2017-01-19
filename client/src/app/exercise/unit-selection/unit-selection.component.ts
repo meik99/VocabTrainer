@@ -31,16 +31,16 @@ export class UnitSelectionComponent implements OnInit {
     { id: 3, typeId: 2, levelId: 3, name: "Spanisch" }
     ];
 
-  units:[
+  private units = [
     { id: 1, name: "Unit 1" },
     { id: 2, name: "Unit 2" }
     ];
 
-  selectedSchooltype;
-  selectedSchoollevel;
-  selectedInputLanguage;
-  selectedOutputLanguage;
-  selectedUnit;
+  selectedSchooltype = {};
+  selectedSchoollevel = {};
+  selectedInputLanguage = {};
+  selectedOutputLanguage = {};
+  selectedUnit = {};
 
   getSchooltypes(){
     return this.schooltypes;
@@ -52,6 +52,10 @@ export class UnitSelectionComponent implements OnInit {
 
   getLanguages(typeId: number, levelId: number){
     return this.languages.filter(language => language.typeId == typeId && language.levelId == levelId);
+  }
+
+  isSelectedInputLanguage(langId: number){
+    return langId == this.selectedInputLanguage;
   }
 
   constructor() { }

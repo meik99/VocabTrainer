@@ -50,8 +50,11 @@
         <a class="list-group-item list-group-item-heading active">
           {{selectedInputLanguage.name}} : {{selectedOutputLanguage.name}} - Einheit
         </a>
-        <a class="list-group-item">Unit 1</a>
-        <a class="list-group-item disabled">Unit 2</a>
+        <a class="list-group-item" *ngFor="let unit of getUnits(selectedSchooltype.id, selectedSchoollevel.id, selectedInputLanguage.id, selectedOutputLanguage.id)"
+           [ngClass]="{'active' : selectedUnit.id == unit.id}"
+           (click)="selectedUnit = unit">
+          {{unit.name}}
+        </a>
       </div>
     </div>
   </div>

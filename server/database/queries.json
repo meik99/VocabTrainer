@@ -1,0 +1,4 @@
+{
+  "findAllSchooltypes" :
+      "select id, description from schooltype"
+}

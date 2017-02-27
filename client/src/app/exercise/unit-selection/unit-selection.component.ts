@@ -3,7 +3,8 @@ import {Component, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-unit-selection',
   templateUrl: 'unit-selection.component.html',
-  styleUrls: ['unit-selection.component.css']
+  styleUrls: ['unit-selection.component.css'],
+  
 })
 export class UnitSelectionComponent implements OnInit {
 
@@ -32,8 +33,8 @@ export class UnitSelectionComponent implements OnInit {
     ];
 
   private units = [
-    { id: 1, name: "Unit 1" },
-    { id: 2, name: "Unit 2" }
+    { id: 1, typeId: 1, levelId: 1, inputLangId: 1, outputLangId: 2, name: "Unit 1" },
+    { id: 2, typeId: 1, levelId: 1, inputLangId: 1, outputLangId: 2, name: "Unit 2" },
     ];
 
   selectedSchooltype = {};
@@ -56,6 +57,11 @@ export class UnitSelectionComponent implements OnInit {
 
   isSelectedInputLanguage(langId: number){
     return langId == this.selectedInputLanguage;
+  }
+
+  getUnits(schoolTypeId: number, schoolLevelId: number, inputLanguageId: number, outputLanguageId: number){
+    return this.units.filter(unit => unit.typeId == schoolTypeId && unit.levelId == schoolLevelId
+      && unit.inputLangId == inputLanguageId && unit.outputLangId == outputLanguageId);
   }
 
   constructor() { }

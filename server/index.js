@@ -1,13 +1,15 @@
 var express = require("express");
+var cors = require("cors");
 var database = require("./database/dbconnector");
-var app = express();
-
 var server_properties = {
     port: 8080,
     endpoints: [
         "/vocabtrainer/api/schooltypes"
     ]
 }
+var app = express();
+
+app.use(cors());
 
 app.get("/", function (request, response) {
     var result = "<p>Avaiable endpoints:</p>";
@@ -16,7 +18,7 @@ app.get("/", function (request, response) {
 })
 
 app.get(server_properties.endpoints[0], function (request, response) {
-    database.findAllSchooltypes(function (error, results, fields) {
+    database.findSchooltypes(function (error, results, fields) {
         response.send(results);
     });
 });

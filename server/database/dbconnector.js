@@ -15,12 +15,20 @@ var connection = mysql.createConnection(
     dbconfig
 );
 
-exports.findAllSchooltypes = function(callback){
-    connection.connect();
-    connection.query(queries.findAllSchooltypes, function(error, results, fields){
+connection.connect();
+
+exports.findSchooltypes = function(callback){
+    connection.query(queries.findSchooltypes, function(error, results, fields){
        if(error) console.log(error);
 
        callback(error, results, fields);
     });
-    connection.end();
+}
+
+exports.findLevelsByType = function (typeId, callback) {
+    connection.query(queries.findSchooltypes.replace(":id", connection.escape(typeId)), function (error, results, fields) {
+        if(error) console.log(error);
+
+        callback(error, results, fields);
+    });
 }

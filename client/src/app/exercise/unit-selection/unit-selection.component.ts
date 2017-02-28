@@ -1,18 +1,16 @@
 import {Component, OnInit, Output} from '@angular/core';
+import {SchooltypeService} from "../../services/schooltype.service";
+import {Schooltype} from "../../models/Schooltype";
 
 @Component({
   selector: 'app-unit-selection',
   templateUrl: 'unit-selection.component.html',
   styleUrls: ['unit-selection.component.css'],
-  
+
 })
 export class UnitSelectionComponent implements OnInit {
 
-  private schooltypes = [
-    { id:1, name: "HTL" },
-    { id:2, name: "HAK" },
-    { id:3 ,name: "AHS" }
-    ];
+  private schooltypes: Schooltype[] = [];
 
   private schoollevel = [
     { id: 1, typeId: 1, name: "1. Jahrgang" },
@@ -64,9 +62,18 @@ export class UnitSelectionComponent implements OnInit {
       && unit.inputLangId == inputLanguageId && unit.outputLangId == outputLanguageId);
   }
 
-  constructor() { }
+  constructor(private schooltypeService: SchooltypeService) { }
 
   ngOnInit() {
+    this.schooltypeService.findAllSchooltypes()
+      .then(types => this.schooltypes = types)
+      .catch(error => {
+        if(error)
+          console.log(error.message);
+        else
+          console.log(error);
+      }
+    );
   }
 
 }

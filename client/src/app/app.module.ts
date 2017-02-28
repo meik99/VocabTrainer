@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UnitSelectionComponent } from './exercise/unit-selection/unit-selection.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { ExerciseUnitComponent } from './exercise/exercise-unit/exercise-unit.component';
+import {SchooltypeService} from "./services/schooltype.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ExerciseUnitComponent } from './exercise/exercise-unit/exercise-unit.co
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [SchooltypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

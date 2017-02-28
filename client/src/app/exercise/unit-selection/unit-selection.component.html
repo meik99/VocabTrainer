@@ -4,10 +4,10 @@
       <div class="list-group">
         <a href="#" class="list-group-item list-group-item-heading active">Schultyp</a>
         <a class="list-group-item"
-           *ngFor="let typ of getSchooltypes()"
+           *ngFor="let typ of schooltypes"
            (click)="selectedSchooltype = typ"
-            [ngClass]="{'disabled' : selectedSchooltype != null && selectedSchooltype.id == typ.id}">
-            {{typ.name}}
+            [class.disabled]="selectedSchooltype == typ">
+            {{typ.description}}
         </a>
       </div>
     </div>

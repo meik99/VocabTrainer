@@ -1,4 +1,6 @@
 {
-  "findAllSchooltypes" :
-      "select id, description from schooltype"
+  "findSchooltypes":
+          "select id, description from schooltype",
+  "findLevelByType":
+          "select id, description, schooltype_id from schoollevel where schooltype_id = :id"
 }

@@ -1,13 +1,21 @@
 <div class="col-md-4">
   <div class="list-group">
     <a class="list-group-item list-group-item-heading active">
-      {{inputLanguage.name}} : {{outputLanguage.name}} - Einheit
+      {{inputLanguage.description}} : {{outputLanguage.description}} - Einheit
     </a>
     <a class="list-group-item"
        *ngFor="let unit of units"
-       [ngClass]="{'active' : selectedUnit.id == unit.id}"
+       [class.active]="selectedUnit == unit"
        (click)="selectedUnit = unit">
-      {{unit.name}}
+      {{unit.description}}
     </a>
   </div>
 </div>
+
+<hr>
+<app-exercise-unit
+  *ngIf="selectedUnit"
+  [unit]="selectedUnit"
+  [inputLanguage]="inputLanguage"
+  [outputLanguage]="outputLanguage"
+></app-exercise-unit>

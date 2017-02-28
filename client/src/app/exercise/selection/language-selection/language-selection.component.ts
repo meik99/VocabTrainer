@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Schooltype} from "../../../models/Schooltype";
 import {Level} from "../../../models/Level";
 import {Language} from "../../../models/Language";
@@ -10,7 +10,8 @@ import {isUndefined} from "util";
   templateUrl: 'language-selection.component.html',
   styleUrls: ['language-selection.component.css']
 })
-export class InputLanguageSelectionComponent implements OnInit {
+export class InputLanguageSelectionComponent implements OnInit, OnChanges {
+
   @Input()
   schoollevel: Level;
 
@@ -23,8 +24,7 @@ export class InputLanguageSelectionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.languageService.findLanguagesByLevel(this.schoollevel)
-      .then(languages => this.languages = languages);
+    this.updateLanguages()
   }
 
   selectInputLanguage(lang: Language): void{
@@ -42,5 +42,15 @@ export class InputLanguageSelectionComponent implements OnInit {
   resetLanguages(): void{
     this.inputLanguage = null;
     this.outputLanguage = null;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.resetLanguages();
+    this.updateLanguages();
+  }
+
+  updateLanguages():void{
+    this.languageService.findLanguagesByLevel(this.schoollevel)
+      .then(languages => this.languages = languages);
   }
 }

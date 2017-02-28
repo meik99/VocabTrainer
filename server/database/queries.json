@@ -6,5 +6,7 @@
   "findLevelByType":
           "select id, description, schooltype_id from schoollevel where schooltype_id = ?",
   "findLanguagesByLevel":
-          "select language.id id, language.description description from language where language.id IN (select language_id from word where word.id IN (select word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?)) union all select foreign_word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?))));"
+          "select language.id id, language.description description from language where language.id IN (select language_id from word where word.id IN (select word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?)) union all select foreign_word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?))));",
+  "findUnits":
+          "select unit.id, unit.description, unit.trivia from unit where unit.id in (select level_unit.unit_id from level_unit where level_unit.schoollevel_id = ?) and unit.id in(select unit_vocab.unit_id from unit_vocab where unit_vocab.vocab_id in(select vocab.id from vocab where vocab.word_id in(select word.id from word where word.language_id = ? or word.language_id = ?) or vocab.foreign_word_id in(select word.id from word where word.language_id = ? or word.language_id = ?)));"
 }

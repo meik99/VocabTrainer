@@ -48,3 +48,11 @@ exports.findLanguagesByLevel = function (levelId, callback) {
        callback(error, results, fields);
     });
 }
+
+exports.findUnits = function (levelId, inputLangId, outputLangId, callback) {
+    connection.query(mysql.format(queries.findUnits, [levelId, inputLangId, outputLangId, inputLangId, outputLangId]), function (error, results, fields) {
+        if(error) console.log(error);
+
+        callback(error, results, fields);
+    })
+}

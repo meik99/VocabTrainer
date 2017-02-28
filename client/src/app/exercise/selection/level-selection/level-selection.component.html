@@ -6,7 +6,7 @@
        class="list-group-item"
        *ngFor="let level of schoolLevels"
        (click)="selectedLevel = level"
-       [class.disabled]="selectedLevel == level">{{level.description}}</a>
+       [class.active]="selectedLevel == level">{{level.description}}</a>
   </div>
 </div>
 

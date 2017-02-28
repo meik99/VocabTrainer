@@ -4,7 +4,7 @@
     <a class="list-group-item"
        *ngFor="let typ of schooltypes"
        (click)="selectSchooltype(typ)"
-       [class.disabled]="selectedSchooltype == typ">
+       [class.active]="selectedSchooltype == typ">
       {{typ.description}}
     </a>
   </div>

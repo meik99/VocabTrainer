@@ -10,14 +10,14 @@ drop table if exists language;
 drop table if exists schooltype;
 
 create table schooltype(
-	id int primary key,
+	id int primary key auto_increment,
 	description varchar(255) not null,
 
 	index type_index (id)
 );
 
 create table schoollevel(
-	id int primary key,
+	id int primary key auto_increment,
 	description varchar(255) not null,
 	schooltype_id int not null,
 
@@ -29,13 +29,13 @@ create table schoollevel(
 );
 
 create table language(
-	id int primary key,
+	id int primary key auto_increment,
 	description varchar(255) not null,
 	index language_index (id)
 );
 
 create table word(
-	id int primary key,
+	id int primary key auto_increment,
 	language_id int not null,
 	word varchar(255) not null,
 	index word_index (id),
@@ -46,7 +46,7 @@ create table word(
 );
 
 create table vocab(
-	id int primary key,
+	id int primary key auto_increment,
 	word_id int not null,
 	foreign_word_id int not null,
 
@@ -61,7 +61,7 @@ create table vocab(
 );
 
 create table unit(
-	id int primary key,
+	id int primary key auto_increment,
 	description varchar(255) not null,
 	trivia varchar(1000),
 	index unit_index (id)

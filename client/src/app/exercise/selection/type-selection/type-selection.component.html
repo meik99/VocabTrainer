@@ -1,0 +1,15 @@
+<div class="col-md-6">
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-heading active">Schultyp</a>
+    <a class="list-group-item"
+       *ngFor="let typ of schooltypes"
+       (click)="selectSchooltype(typ)"
+       [class.disabled]="selectedSchooltype == typ">
+      {{typ.description}}
+    </a>
+  </div>
+</div>
+
+<app-level-selection *ngIf="selectedSchooltype"
+                     [schooltype]="selectedSchooltype">
+</app-level-selection>

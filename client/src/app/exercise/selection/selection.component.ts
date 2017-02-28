@@ -1,25 +1,19 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {SchooltypeService} from "../../services/schooltype.service";
 import {Schooltype} from "../../models/Schooltype";
+import {SchoollevelService} from "../../services/schoollevel.service";
+import {Level} from "../../models/Level";
 
 @Component({
-  selector: 'app-unit-selection',
-  templateUrl: 'unit-selection.component.html',
-  styleUrls: ['unit-selection.component.css'],
+  selector: 'app-selection',
+  templateUrl: 'selection.component.html',
+  styleUrls: ['selection.component.css'],
 
 })
-export class UnitSelectionComponent implements OnInit {
+export class SelectionComponent implements OnInit {
 
-  private schooltypes: Schooltype[] = [];
 
-  private schoollevel = [
-    { id: 1, typeId: 1, name: "1. Jahrgang" },
-    { id: 2, typeId: 1, name: "2. Jahrgang" },
-    { id: 3, typeId: 2, name: "1. Kindergarten" } ,
-    { id: 4, typeId: 2, name: "2. Kindergarten" },
-    { id: 5, typeId: 3, name: "1. Klasse" } ,
-    { id: 6, typeId: 3, name: "2. Klasse" }
-    ];
+  private schoollevels: Level[] = [];
 
   private languages = [
     { id: 1, typeId: 1, levelId: 1, name: "Deutsch" },
@@ -35,18 +29,13 @@ export class UnitSelectionComponent implements OnInit {
     { id: 2, typeId: 1, levelId: 1, inputLangId: 1, outputLangId: 2, name: "Unit 2" },
     ];
 
-  selectedSchooltype = {};
-  selectedSchoollevel = {};
+  selectedSchooltype: Schooltype;
+  selectedSchoollevel: Level;
   selectedInputLanguage = {};
   selectedOutputLanguage = {};
   selectedUnit = {};
 
-  getSchooltypes(){
-    return this.schooltypes;
-  }
-
   getSchoollevel(typeId : number){
-    return this.schoollevel.filter(level => level.typeId == typeId);
   }
 
   getLanguages(typeId: number, levelId: number){
@@ -62,18 +51,14 @@ export class UnitSelectionComponent implements OnInit {
       && unit.inputLangId == inputLanguageId && unit.outputLangId == outputLanguageId);
   }
 
-  constructor(private schooltypeService: SchooltypeService) { }
+  constructor(
+    private schooltypeService: SchooltypeService,
+    private schoollevelService: SchoollevelService) { }
 
   ngOnInit() {
-    this.schooltypeService.findAllSchooltypes()
-      .then(types => this.schooltypes = types)
-      .catch(error => {
-        if(error)
-          console.log(error.message);
-        else
-          console.log(error);
-      }
-    );
+
   }
+
+
 
 }

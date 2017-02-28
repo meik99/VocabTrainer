@@ -25,10 +25,26 @@ exports.findSchooltypes = function(callback){
     });
 }
 
+exports.findSchooltypeById = function (typeId, callback) {
+    connection.query(mysql.format(queries.findSchooltypeById, [typeId]), function (error, results, fields) {
+       if(error) console.log(error);
+
+       callback(error, results, fields);
+    });
+}
+
 exports.findLevelsByType = function (typeId, callback) {
-    connection.query(queries.findSchooltypes.replace(":id", connection.escape(typeId)), function (error, results, fields) {
+    connection.query(mysql.format(queries.findLevelByType, [typeId]), function (error, results, fields) {
         if(error) console.log(error);
 
         callback(error, results, fields);
+    });
+}
+
+exports.findLanguagesByLevel = function (levelId, callback) {
+    connection.query(mysql.format(queries.findLanguagesByLevel, [levelId, levelId]), function (error, results, fields) {
+       if(error) console.log(error);
+
+       callback(error, results, fields);
     });
 }

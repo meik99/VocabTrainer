@@ -17,4 +17,13 @@ export class SchooltypeService extends BaseService{
       .then(response => response.json() as Schooltype[])
       .catch(this.handleError);
   }
+
+  findSchooltypeById(schooltype_id: number): Promise<Schooltype>{
+    const requestUrl = `${this.typeurl}/${schooltype_id}`;
+
+    return this.http.get(requestUrl)
+      .toPromise()
+      .then(response => response.json() as Schooltype)
+      .catch(this.handleError);
+  }
 }

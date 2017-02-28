@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
 import {Schooltype} from "../models/Schooltype";
 import {BaseService} from "./base.service";
-import Level = webdriver.logging.Level;
+import {Level} from "../models/Level";
 
 @Injectable()
 export class SchoollevelService extends BaseService{
-  private levelurl: string = this.URL_BASE + "schoollevel";
+  private levelurl: string = this.URL_BASE + "schoollevels";
 
   constructor(private http: Http) {super();}
 

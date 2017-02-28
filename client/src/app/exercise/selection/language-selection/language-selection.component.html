@@ -1,0 +1,31 @@
+<div class="col-md-4">
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-heading active">{{schoollevel.description}} -
+      Ausgangssprache
+      <button class="badge" (click)="resetLanguages()">Reset</button>
+    </a>
+    <a href="#" class="list-group-item"
+       *ngFor="let lang of languages"
+       (click)="selectInputLanguage(lang)"
+       [class.disabled]="outputLanguage == lang">
+      {{lang.description}}
+    </a>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-heading active">{{schoollevel.description}} -
+      Fremdsprache</a>
+    <a href="#" class="list-group-item"
+       *ngFor="let lang of languages"
+       [class.disabled]="inputLanguage == lang"
+       (click)="selectOutputLanguage(lang)">
+      {{lang.description}}
+    </a>
+  </div>
+</div>
+
+<app-unit-selection
+  [schoollevel]="schoollevel"
+  [inputLanguage]="inputLanguage"
+  [outputLanguage]="outputLanguage"></app-unit-selection>

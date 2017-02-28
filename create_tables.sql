@@ -112,7 +112,7 @@ select '' 'word' from dual;
 select '' '=================' from dual;
 show columns from word;
 select '' '=================' from dual;
-select '' 'schollevel' from dual;
+select '' 'schoollevel' from dual;
 select '' '=================' from dual;
 show columns from schoollevel;
 select '' '=================' from dual;

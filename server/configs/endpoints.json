@@ -1,0 +1,7 @@
+[
+  "/vocabtrainer/api/schooltypes",
+  "/vocabtrainer/api/schooltypes/:id",
+  "/vocabtrainer/api/schoollevels/:typeId",
+  "/vocabtrainer/api/languages/:levelId",
+  "/vocabtrainer/api/units/:levelId/:inputLanguageId/:outputLanguageId"
+]

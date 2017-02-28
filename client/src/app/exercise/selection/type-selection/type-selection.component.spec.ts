@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { UnitSelectionComponent } from './unit-selection.component';
+import { TypeSelectionComponent } from './type-selection.component';
 
-describe('UnitSelectionComponent', () => {
-  let component: UnitSelectionComponent;
-  let fixture: ComponentFixture<UnitSelectionComponent>;
+describe('TypeSelectionComponent', () => {
+  let component: TypeSelectionComponent;
+  let fixture: ComponentFixture<TypeSelectionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UnitSelectionComponent ]
+      declarations: [ TypeSelectionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UnitSelectionComponent);
+    fixture = TestBed.createComponent(TypeSelectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

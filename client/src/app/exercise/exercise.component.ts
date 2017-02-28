@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {SelectionComponent} from "./selection/selection.component";
+import {ExerciseUnitComponent} from "./exercise-unit/exercise-unit.component";
+import {Unit} from "../models/Unit";
 
 @Component({
   selector: 'app-exercise',
@@ -10,6 +13,9 @@ export class ExerciseComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
+
+
 
 }

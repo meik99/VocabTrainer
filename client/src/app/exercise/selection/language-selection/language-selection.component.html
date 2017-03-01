@@ -1,30 +1,30 @@
 <div class="col-md-4">
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-heading active">{{schoollevel.description}} -
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-heading active">{{schoollevel.description}} -
       Ausgangssprache
       <button class="badge" (click)="resetLanguages()">Reset</button>
-    </a>
-    <a href="#" class="list-group-item"
+    </li>
+    <li class="list-group-item"
        *ngFor="let lang of languages"
        (click)="selectOutputLanguage(lang)"
        [class.disabled]="inputLanguage == lang"
        [class.active]="outputLanguage == lang">
       {{lang.description}}
-    </a>
-  </div>
+    </li>
+  </ul>
 </div>
 <div class="col-md-4">
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-heading active">{{schoollevel.description}} -
-      Fremdsprache</a>
-    <a href="#" class="list-group-item"
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-heading active">{{schoollevel.description}} -
+      Fremdsprache</li>
+    <li class="list-group-item"
        *ngFor="let lang of languages"
        [class.disabled]="outputLanguage == lang"
        [class.active]="inputLanguage == lang"
        (click)="selectInputLanguage(lang)">
       {{lang.description}}
-    </a>
-  </div>
+    </li>
+  </ul>
 </div>
 
 <app-unit-selection

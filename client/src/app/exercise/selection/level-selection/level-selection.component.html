@@ -1,13 +1,13 @@
 <div class="col-md-6">
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-heading active">{{schooltype.description}} -
-      Jahrgang</a>
-    <a href="#"
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-heading active">{{schooltype.description}} -
+      Jahrgang</li>
+    <li
        class="list-group-item"
        *ngFor="let level of schoolLevels"
        (click)="selectedLevel = level"
-       [class.active]="selectedLevel == level">{{level.description}}</a>
-  </div>
+       [class.active]="selectedLevel == level">{{level.description}}</li>
+  </ul>
 </div>
 
 <app-language-selection

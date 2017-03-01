@@ -22,7 +22,7 @@ export class VocabService extends BaseService{
 
   populateVocab(vocab: Vocab): Promise<Vocab>{
     return Promise.resolve( v => {
-          v = new Vocab(vocab.id, vocab.word_id, vocab.foreign_word_id, this.wordService)
+          v = new Vocab(vocab.id, vocab.word_id, vocab.foreign_word_id)
           v.loadWords();
           return v;
         }

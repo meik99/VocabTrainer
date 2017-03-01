@@ -5,7 +5,7 @@ module.exports = function (app) {
     var endpoints = require("./configs/endpoints.json");
     var database = require("./database/dbconnector");
 
-    app.get(endpoints[5], function(request, response){
+    app.get(endpoints.vocabsByUnitId, function(request, response){
         var unit = request.params["unitId"];
         if(unit){
             var unitId = +unit;

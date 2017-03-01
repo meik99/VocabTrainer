@@ -5,7 +5,7 @@ module.exports = function(app){
     var endpoints = require("./configs/endpoints.json");
     var database = require("./database/dbconnector");
 
-    app.get(endpoints[2], function (request, response) {
+    app.get(endpoints.levelByTypeId, function (request, response) {
         if(request.params["typeId"]){
             var typeId = +request.params["typeId"];
 

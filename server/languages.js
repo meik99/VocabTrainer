@@ -5,7 +5,7 @@ module.exports = function (app) {
     var endpoints = require("./configs/endpoints.json");
     var database = require("./database/dbconnector");
 
-    app.get(endpoints[3], function (request, response) {
+    app.get(endpoints.languageByLevelId, function (request, response) {
         if(request.params["levelId"]){
             var levelId = +request.params["levelId"];
 
@@ -17,7 +17,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get(endpoints[8], function (request, response) {
+    app.get(endpoints.languageById, function (request, response) {
        var language = request.params["languageId"];
        if(language){
            var languageId = +language;

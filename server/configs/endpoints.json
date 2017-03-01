@@ -1,11 +1,24 @@
-[
-  "/vocabtrainer/api/schooltypes",
-  "/vocabtrainer/api/schooltype/:id",
-  "/vocabtrainer/api/schoollevels/:typeId",
-  "/vocabtrainer/api/languages/:levelId",
-  "/vocabtrainer/api/units/:levelId/:inputLanguageId/:outputLanguageId",
-  "/vocabtrainer/api/vocabs/:unitId",
-  "/vocabtrainer/api/words/:vocabId",
-  "/vocabtrainer/api/word/:wordId",
-  "/vocabtrainer/api/language/:languageId"
-]
+{
+  "types":
+          "/vocabtrainer/api/schooltypes",
+  "typeById":
+          "/vocabtrainer/api/schooltype/:id",
+  "levelByTypeId":
+          "/vocabtrainer/api/schoollevels/:typeId",
+  "languageById":
+          "/vocabtrainer/api/language/:languageId",
+  "languageByLevelId":
+          "/vocabtrainer/api/languages/:levelId",
+  "unitByLevelLanguage":
+          "/vocabtrainer/api/units/:levelId/:inputLanguageId/:outputLanguageId",
+  "vocabsByUnitId":
+          "/vocabtrainer/api/vocabs/:unitId",
+  "wordsByVocabId":
+          "/vocabtrainer/api/words/:vocabId",
+  "wordById":
+          "/vocabtrainer/api/word/:wordId",
+  "login":
+          "/vocabtrainer/api/administration/login",
+  "loginCallback":
+          "/vocabtrainer/api/administration/authenticated"
+}

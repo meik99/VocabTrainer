@@ -5,7 +5,7 @@ module.exports = function (app) {
     var endpoints = require("./configs/endpoints.json");
     var database = require("./database/dbconnector");
 
-    app.get(endpoints[6], function (request, response) {
+    app.get(endpoints.wordsByVocabId, function (request, response) {
         var vocab = request.params["vocabId"];
 
         if(vocab){
@@ -18,7 +18,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get(endpoints[7], function (request, response) {
+    app.get(endpoints.wordById, function (request, response) {
        var word = request.params["wordId"];
        if(word){
            var wordId = +word;

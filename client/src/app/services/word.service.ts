@@ -31,7 +31,7 @@ export class WordService extends BaseService{
   populateWord(word: Word): Promise<Word>{
     return Promise.resolve(
       w => {
-        w = new Word(word.id, word.word, word.language_id, this.languageService);
+        w = new Word(word.id, word.word, word.language_id);
         w.loadWord();
         return w;
       }

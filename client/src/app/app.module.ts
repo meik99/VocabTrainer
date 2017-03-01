@@ -18,6 +18,10 @@ import { UnitSelectionComponent } from './exercise/selection/unit-selection/unit
 import {UnitService} from "./services/unit.service";
 import {VocabService} from "./services/vocab.service";
 import {WordService} from "./services/word.service";
+import {AppRoutingModule} from "./routing/app-routing/app-routing.module";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AdministrationComponent } from './administration/administration.component';
+import { LoginComponent } from './administration/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +33,16 @@ import {WordService} from "./services/word.service";
     TypeSelectionComponent,
     LevelSelectionComponent,
     InputLanguageSelectionComponent,
-    UnitSelectionComponent
+    UnitSelectionComponent,
+    PageNotFoundComponent,
+    AdministrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [
     SchooltypeService,

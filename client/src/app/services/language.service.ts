@@ -8,14 +8,22 @@ import {URL_BASE} from "../config";
 
 @Injectable()
 export class LanguageService extends BaseService{
-  URL_BASE = this.URL_BASE + "languages";
+  languagesUrl = this.URL_BASE + "languages";
+  languageUrl = this.URL_BASE + "language";
 
   constructor(private http: Http) {super(); }
 
   findLanguagesByLevel(schoollevel: Level): Promise<Language[]>{
-    return this.http.get(`${this.URL_BASE}/${schoollevel.id}`)
+    return this.http.get(`${this.languagesUrl}/${schoollevel.id}`)
       .toPromise()
       .then(response => response.json() as Language[])
+      .catch(this.handleError);
+  }
+
+  findLanguageById(languageId: number): Promise<Language>{
+    return this.http.get(`${this.languageUrl}/${languageId}`)
+      .toPromise()
+      .then(response => response.json() as Language)
       .catch(this.handleError);
   }
 }

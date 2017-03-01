@@ -16,6 +16,8 @@ import { InputLanguageSelectionComponent } from './exercise/selection/language-s
 import {LanguageService} from "./services/language.service";
 import { UnitSelectionComponent } from './exercise/selection/unit-selection/unit-selection.component';
 import {UnitService} from "./services/unit.service";
+import {VocabService} from "./services/vocab.service";
+import {WordService} from "./services/word.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {UnitService} from "./services/unit.service";
     SchooltypeService,
     SchoollevelService,
     LanguageService,
-    UnitService
+    UnitService,
+    VocabService,
+    WordService
   ],
   bootstrap: [AppComponent]
 })

@@ -16,4 +16,23 @@ module.exports = function (app) {
             response.send([]);
         }
     });
+
+    app.get(endpoints[8], function (request, response) {
+       var language = request.params["languageId"];
+       if(language){
+           var languageId = +language;
+
+           database.findLanguageById(languageId, function (error, results, fields) {
+               if(results.length >= 1){
+                   response.send(results[0]);
+               }else{
+                   console.error("Language ids not unambiguous");
+                   response.send({});
+               }
+
+           });
+       }else{
+           response.send({});
+       }
+    });
 };

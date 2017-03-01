@@ -1,4 +1,5 @@
 import {Vocab} from "./Vocab";
+import {VocabService} from "../services/vocab.service";
 /**
  * Created by michael on 1/20/17.
  */
@@ -8,7 +9,8 @@ export class Unit{
   constructor(
     public id: number,
     public description: string,
-    public trivia: string
+    public trivia: string,
+    private vocabService: VocabService
   ){
 
   }

@@ -18,6 +18,8 @@
   "findWordsByVocab":
           "select id, language_id, word from word where id = ? or id = ?;",
   "findWordById":
-          "select id, language_id, word from word where id = ?;"
+          "select id, language_id, word from word where id = ?;",
+  "findUserByUsername":
+          "select id, username, password_hash, token, tokentime from account where username like ?;"
 
 }

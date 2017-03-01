@@ -3,21 +3,48 @@
  */
 module.exports = function (app) {
     var endpoints = require("../configs/endpoints.json");
+    var database = require("../database/dbconnector");
     var passport = require("passport");
+    var passportLocal = require("passport-local");
 
-    app.get(
-        endpoints.login,
-        passport.authenticate(
-            'google',
+    passport.use(new passportLocal.Strategy(
+        {passReqToCallback : true},
+        function(req, username, password, done) {
+            database.findUser(username, function(err, results, fields) {
+                if(err){
+                    return done(err);
+                }
+                if(!results || results.length <= 0){
+                    return done(null, false, {message: "Incorrect username"});
+                }
+                if(results.length == 1){
+                    if(results[0]["password_hash"] === password){
+                        return done(null, {username: username, password: password});
+                    }
+                }
+                if(results.length > 1){
+                    console.error("Username not unambiguous");
+                    return done(null, false, {message: "Username not unambiguous"});
+                }
+
+                return (null, false, {message: "Unexpected error"});
+            });
+        }
+    ));
+
+    passport.serializeUser(function(user, done) {
+        done(null, user);
+    });
+
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
+    });
+
+    app.post(endpoints.login,
+        passport.authenticate("local",
             {
-                scope: ['https://www.googleapis.com/auth/plus.login']
-            }
-        )
-    );
+                successRedirect: endpoints.loginSuccess,
+                failureRedirect: endpoints.loginFailure,
+                failureFlash: false }));
 
-    app.get(endpoints.loginCallback,
-        passport.authenticate('google', { failureRedirect: 'http://localhost:4200/administration/login' }),
-        function(req, res) {
-            res.redirect('http://localhost:4200/administration/manage');
-        });
 };

@@ -19,6 +19,12 @@
           "/vocabtrainer/api/word/:wordId",
   "login":
           "/vocabtrainer/api/administration/login",
-  "loginCallback":
-          "/vocabtrainer/api/administration/authenticated"
+  "loginAuthenticated":
+          "/vocabtrainer/api/administration/authenticated",
+  "loginFailure":
+          "http://localhost:4200/administration/login",
+  "loginSuccess":
+          "http://localhost:4200/administration/manage",
+  "oauth_callback_url":
+          "http://localhost:8080/vocabtrainer/api/administration/authenticated"
 }

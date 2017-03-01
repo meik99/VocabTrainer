@@ -22,6 +22,7 @@ import {AppRoutingModule} from "./routing/app-routing/app-routing.module";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { LoginComponent } from './administration/login/login.component';
+import { ManageComponent } from './administration/manage/manage.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoginComponent } from './administration/login/login.component';
     UnitSelectionComponent,
     PageNotFoundComponent,
     AdministrationComponent,
-    LoginComponent
+    LoginComponent,
+    ManageComponent
   ],
   imports: [
     BrowserModule,

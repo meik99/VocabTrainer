@@ -108,3 +108,11 @@ exports.findLanguageById = function (languageId, callback) {
         callback(error, results, fields);
     });
 };
+
+exports.findUser = function (username, callback) {
+    connection.query(mysql.format(queries.findUserByUsername, [username]), function (error, results, fields) {
+        if(error) console.log(error);
+
+        callback(error, results, fields);
+    });
+};

@@ -79,5 +79,47 @@ insert into vocab values(16, 10, 16);
 insert into vocab values(17, 11, 17);
 insert into vocab values(18, 12, 18);
 
+insert into unit(id, description) values(1, "Unit 1");
+insert into unit(id, description) values(2, "Unit 2");
+insert into unit(id, description) values(3, "Unit 3");
 
+insert into unit(id, description) values(4, "Unit 1");
+insert into unit(id, description) values(5, "Unit 2");
+insert into unit(id, description) values(6, "Unit 3");
 
+insert into unit(id, description) values(7, "Stay away from electric circuits");
+insert into unit(id, description) values(8, "The Thumbs does not belong into the mouth");
+insert into unit(id, description) values(9, "Rectangles are not triangles");
+
+insert into level_unit values(1, 1);
+insert into level_unit values(2, 2);
+insert into level_unit values(3, 3);
+
+insert into level_unit values(10, 4);
+insert into level_unit values(11, 5);
+insert into level_unit values(12, 6);
+
+insert into level_unit values(6, 7);
+insert into level_unit values(7, 8);
+insert into level_unit values(8, 9);
+
+insert into unit_vocab values(1, 1);
+insert into unit_vocab values(1, 2);
+insert into unit_vocab values(2, 3);
+insert into unit_vocab values(2, 4);
+insert into unit_vocab values(3, 5);
+insert into unit_vocab values(3, 6);
+
+insert into unit_vocab values(4, 1);
+insert into unit_vocab values(4, 2);
+insert into unit_vocab values(5, 3);
+insert into unit_vocab values(5, 4);
+insert into unit_vocab values(6, 5);
+insert into unit_vocab values(6, 6);
+
+insert into unit_vocab values(7, 7);
+insert into unit_vocab values(7, 8);
+insert into unit_vocab values(8, 9);
+insert into unit_vocab values(8, 10);
+insert into unit_vocab values(9, 11);
+insert into unit_vocab values(9, 12);

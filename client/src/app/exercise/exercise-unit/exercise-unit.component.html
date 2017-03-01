@@ -5,41 +5,61 @@
     <div class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3>{{inputLanguage.description}}</h3>
+          <h3>{{outputLanguage.description}}</h3>
+          <span *ngIf="vocabs && current">Noch {{vocabs.length+1}} Vokabeln übrig!</span>
         </div>
         <div class="panel-body">
-            <input class="form-control" type="text" readonly>
+            <input *ngIf="current && current.word && current.foreignWord"
+              class="form-control" type="text" [value]="getForeignWord().word" readonly>
+          <div *ngIf="!current"
+                 class="panel panel-success">
+            <div class="panel-heading">
+              <h5>Du bist fertig!</h5>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3>{{outputLanguage.description}}</h3>
+          <h3>{{inputLanguage.description}}</h3>
         </div>
         <div class="panel-body">
-          <input class="form-control" type="text">
+          <input class="form-control" type="text" #inputWord
+                 (keypress)="checkUserInput($event, inputWord)">
         </div>
       </div>
     </div>
   </div>
 
-  <h4>Development Data</h4>
-  <ul>
-    <li *ngFor="let voc of vocabs">
-      <p>
+  <div class="row" *ngIf="correct != null">
+    <div class="col-md-12">
+      <div class="panel" [class.panel-success]="correct" [class.panel-danger]="!correct">
+        <div class="panel-heading">
+          <h5 *ngIf="correct">Richtig!</h5>
+          <h5 *ngIf="!correct">Falsch!</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div *ngIf="isDevMode()">
+    <h4>Development Data</h4>
+    <ul>
+      <li *ngFor="let voc of vocabs">
         <label>Id: </label> {{voc.id}}
-      </p>
-      <p *ngIf="voc.word">
-        <label>Word: </label> {{voc.word.word}} |
-        <span *ngIf="voc.word.language">{{voc.word.language.description}}</span>
-      </p>
-      <p *ngIf="voc.foreignWord">
-        <label>Foreign Word: </label> {{voc.foreignWord.word}} |
-        <span *ngIf="voc.foreignWord.language">{{voc.foreignWord.language.description}}</span>
-      </p>
-
-    </li>
-  </ul>
-
+        <br>
+        <label>Word: </label> {{voc.word_id}}
+        <div *ngIf="voc.word"> {{voc.word.word}}
+          <div *ngIf="voc.word.language"> {{voc.word.language.description}} </div>
+        </div>
+        <br>
+        <label>Foreign Word: </label> {{voc.foreign_word_id}}
+        <div *ngIf="voc.foreignWord"> {{voc.foreignWord.word}}
+          <div *ngIf="voc.foreignWord.language"> {{voc.foreignWord.language.description}} </div>
+        </div>
+      </li>
+    </ul>
+  </div>-->
 </div>

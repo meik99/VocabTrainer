@@ -8,25 +8,9 @@ export class Vocab{
   constructor(
     public id: number,
     public word_id: number,
-    public foreign_word_id: number,
-    private wordService: WordService
+    public foreign_word_id: number
   ){
 
   }
 
-  loadWords(): void{
-    this.wordService.findWordById(this.word_id)
-      .then(result => {
-        this.word = result;
-        this.wordService.populateWord(this.word)
-          .then(result => this.word = result);
-      });
-
-    this.wordService.findWordById(this.foreign_word_id)
-      .then(result => {
-        this.foreignWord = result;
-        this.wordService.populateWord(this.foreignWord)
-          .then(result => this.foreignWord = result)
-      });
-  }
 }

@@ -6,9 +6,9 @@
     </a>
     <a href="#" class="list-group-item"
        *ngFor="let lang of languages"
-       (click)="selectInputLanguage(lang)"
-       [class.disabled]="outputLanguage == lang"
-       [class.active]="inputLanguage == lang">
+       (click)="selectOutputLanguage(lang)"
+       [class.disabled]="inputLanguage == lang"
+       [class.active]="outputLanguage == lang">
       {{lang.description}}
     </a>
   </div>
@@ -19,9 +19,9 @@
       Fremdsprache</a>
     <a href="#" class="list-group-item"
        *ngFor="let lang of languages"
-       [class.disabled]="inputLanguage == lang"
-       [class.active]="outputLanguage == lang"
-       (click)="selectOutputLanguage(lang)">
+       [class.disabled]="outputLanguage == lang"
+       [class.active]="inputLanguage == lang"
+       (click)="selectInputLanguage(lang)">
       {{lang.description}}
     </a>
   </div>

@@ -6,10 +6,13 @@ module.exports = function (app) {
     var database = require("../database/dbconnector");
     var passport = require("passport");
     var passportLocal = require("passport-local");
+    var sha265 = require("sha256");
 
     passport.use(new passportLocal.Strategy(
         {passReqToCallback : true},
         function(req, username, password, done) {
+            password = sha265(password);
+
             database.findUser(username, function(err, results, fields) {
                 if(err){
                     return done(err);
@@ -19,7 +22,11 @@ module.exports = function (app) {
                 }
                 if(results.length == 1){
                     if(results[0]["password_hash"] === password){
-                        return done(null, {username: username, password: password});
+                        var user = {username: username, password: password};
+
+                        return done(null, user);
+                    }else{
+                        return done(null, false, {message: "Incorrect password"});
                     }
                 }
                 if(results.length > 1){
@@ -27,24 +34,44 @@ module.exports = function (app) {
                     return done(null, false, {message: "Username not unambiguous"});
                 }
 
-                return (null, false, {message: "Unexpected error"});
+                return done(null, false, {message: "Unexpected error"});
             });
         }
     ));
 
     passport.serializeUser(function(user, done) {
-        done(null, user);
+        done(null, user.username);
     });
 
     passport.deserializeUser(function(user, done) {
-        done(null, user);
+        database.findUser(user, function (err, results, fields) {
+            if(results.length > 0) {
+                done(null, {username: results[0].username, password: results[1].password_hash});
+            }
+        });
+
     });
 
-    app.post(endpoints.login,
-        passport.authenticate("local",
-            {
-                successRedirect: endpoints.loginSuccess,
-                failureRedirect: endpoints.loginFailure,
-                failureFlash: false }));
+    app.post(endpoints.login, passport.authenticate("local"),
+        function (request, response) {
+            console.log("authenticated");
+            if(request.user){
+                response.send({username: request.user.username, authenticated: true});
+            }else{
+                response.send({username: null, authenticated: false});
+            }
+    });
 
+    app.get(endpoints.loginSuccess, function (request, response) {
+        if(request.user){
+            response.send({username: request.user.username, authenticated: true});
+        }else{
+            response.send({username: null, authenticated: false});
+        }
+    });
+
+    app.get(endpoints.loginFailure, function (request, response) {
+        console.log("failure");
+       response.send({username: null, authenticated: false});
+    });
 };

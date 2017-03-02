@@ -23,6 +23,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AdministrationComponent } from './administration/administration.component';
 import { LoginComponent } from './administration/login/login.component';
 import { ManageComponent } from './administration/manage/manage.component';
+import {AuthenticationService} from "./services/authentication.service";
+import {ManagementNavbarComponent} from './administration/navbar/navbar.component';
+import { ManageUnitComponent } from './administration/manage-unit/manage-unit.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { ManageComponent } from './administration/manage/manage.component';
     PageNotFoundComponent,
     AdministrationComponent,
     LoginComponent,
-    ManageComponent
+    ManageComponent,
+    ManagementNavbarComponent,
+    ManageUnitComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,8 @@ import { ManageComponent } from './administration/manage/manage.component';
     LanguageService,
     UnitService,
     VocabService,
-    WordService
+    WordService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

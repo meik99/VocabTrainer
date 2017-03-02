@@ -22,8 +22,12 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "core-js": "^2.4.1",
+    "fast-sha256": "^1.0.0",
     "rxjs": "^5.0.1",
+    "sha256": "^0.2.0",
+    "text-encoding": "^0.6.4",
     "ts-helpers": "^1.1.1",
+    "tweetnacl-util": "^0.14.0",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
@@ -42,6 +46,7 @@
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
+    "sha256": "^0.2.0",
     "typescript": "~2.0.3"
   }
 }

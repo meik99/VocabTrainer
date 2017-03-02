@@ -1,5 +1,6 @@
 use vocabDB;
 
+drop table if exists account;
 drop table if exists level_unit;
 drop table if exists unit_vocab;
 drop table if exists vocab;
@@ -90,6 +91,14 @@ create table unit_vocab(
 	constraint vocab_assoc_unit_pk 
 		foreign key vocab_unit_assoc_index (vocab_id)
 		references vocab(id)
+);
+
+create table account(
+    id int primary key auto_increment,
+    username varchar(255) not null unique,
+    password_hash varchar(1024) not null,
+    token varchar(1024),
+    tokentime datetime
 );
 
 select '' 'level_unit_assoc' from dual;

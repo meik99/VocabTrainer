@@ -1,5 +1,7 @@
 use vocabDB;
 
+insert into account select NULL, 'meik99', sha2('abcdef', 256), NULL, NULL from dual;
+
 insert into schooltype values(1, 'HTL');
 insert into schooltype values(2, 'HAK');
 insert into schooltype values(3, 'AHS');

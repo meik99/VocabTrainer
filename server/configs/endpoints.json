@@ -22,9 +22,9 @@
   "loginAuthenticated":
           "/vocabtrainer/api/administration/authenticated",
   "loginFailure":
-          "http://localhost:4200/administration/login",
+          "/vocabtrainer/api/administration/failure",
   "loginSuccess":
-          "http://localhost:4200/administration/manage",
+          "/vocabtrainer/api/administration/success",
   "oauth_callback_url":
           "http://localhost:8080/vocabtrainer/api/administration/authenticated"
 }

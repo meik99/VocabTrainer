@@ -25,7 +25,7 @@ import { LoginComponent } from './administration/login/login.component';
 import { ManageComponent } from './administration/manage/manage.component';
 import {AuthenticationService} from "./services/authentication.service";
 import {ManagementNavbarComponent} from './administration/navbar/navbar.component';
-import { ManageUnitComponent } from './administration/manage-unit/manage-unit.component';
+import { ManageTypesComponent } from './administration/manage/manage-types/manage-types.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { ManageUnitComponent } from './administration/manage-unit/manage-unit.co
     LoginComponent,
     ManageComponent,
     ManagementNavbarComponent,
-    ManageUnitComponent
+    ManageTypesComponent
   ],
   imports: [
     BrowserModule,

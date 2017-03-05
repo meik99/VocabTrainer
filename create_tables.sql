@@ -1,4 +1,4 @@
-create database vocabDB;
+
 use vocabDB;
 
 drop table if exists account;

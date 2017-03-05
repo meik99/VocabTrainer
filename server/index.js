@@ -6,8 +6,14 @@ var server_properties = require("./configs/server_properties.json");
 var endpoints = require("./configs/endpoints.json");
 var passport = require("passport");
 var serverconfig = require("./configs/server_properties.json");
+var fs = require('fs');
+var https = require('https');
+var certificates = require("./configs/confidential/certificate.json");
 
+var privateKey  = fs.readFileSync(certificates.privkey, 'utf8');
+var certificate = fs.readFileSync(certificates.cert, 'utf8');
 
+var credentials = {key: privateKey, cert: certificate};
 
 var app = express();
 
@@ -41,6 +47,6 @@ require("./vocabs")(app);
 require("./words")(app);
 require("./administration/login")(app);
 
-app.listen(server_properties.port, function () {
-    console.log("REST-Api running on " + server_properties.port);
-});
+var httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(server_properties.port);

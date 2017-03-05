@@ -17,6 +17,7 @@ export abstract class BaseService {
     }else{
       console.log("An unexpected error occurred");
     }
+    throw error;
   }
 
 }

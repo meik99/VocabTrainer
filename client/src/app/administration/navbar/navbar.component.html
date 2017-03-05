@@ -1,13 +1,25 @@
-
+<div class="container">
   <div class="col-md-3 col-lg-2 col-sm-4 col-xs-12">
     <ul class="list-group">
       <!--<li class="list-group-item list-group-item-heading side">Mangement Navigation</li>-->
-      <li class="list-group-item" routerLink="/administration/manage/" routerLinkActive="active">
+      <li class="list-group-item" [routerLink]="['/administration/manage', {outlets: {management: ['profile']}}]" routerLinkActive="active">
        Profil
       </li>
-      <li class="list-group-item" routerLink="/administration/types/" routerLinkActive="active">
+      <li class="list-group-item" [routerLink]="['/administration/manage', {outlets: {management: ['types']}}]" routerLinkActive="active">
         Schultypen
+      </li>
+      <li class="list-group-item" [routerLink]="['/administration/manage', {outlets: {management: ['levels']}}]" routerLinkActive="active">
+        Schulstufen
+      </li>
+      <li class="list-group-item" [routerLink]="['/administration/manage', {outlets: {management: ['units']}}]" routerLinkActive="active">
+        Einheiten
+      </li>
+      <li class="list-group-item" [routerLink]="['/administration/manage', {outlets: {management: ['vocabs']}}]" routerLinkActive="active">
+        Vokabeln
       </li>
     </ul>
   </div>
-
+  <div class="col-md-9 col-lg-10 col-sm-8 col-xs-12">
+    <router-outlet name="management"></router-outlet>
+  </div>
+</div>

@@ -1,14 +1,17 @@
-<div class="col-md-6">
-  <ul class="list-group">
-    <li class="list-group-item list-group-item-heading active">Schultyp</li>
-    <li class="list-group-item"
-       *ngFor="let typ of schooltypes"
-       (click)="selectSchooltype(typ)"
-       [class.active]="selectedSchooltype == typ">
-      {{typ.description}}
-    </li>
-  </ul>
-</div>
+
+  <div class="col-md-6">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-heading active">Schultyp</li>
+      <li class="list-group-item"
+         *ngFor="let typ of schooltypes"
+         (click)="selectSchooltype(typ)"
+         [class.active]="selectedSchooltype == typ">
+        {{typ.description}}
+      </li>
+    </ul>
+  </div>
+
+
 
 <app-level-selection *ngIf="selectedSchooltype"
                      [schooltype]="selectedSchooltype">

@@ -20,30 +20,36 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.username="a";
-    this.password="a";
+    this.username="";
+    this.password="";
     this.login(false);
   }
 
   login(setWrongPassword: boolean): void{
-    if(this.username && this.password){
-      console.log("Hola");
       console.log(this.username, this.password);
 
-      this.authService.login({username: this.username, password: this.password})
-        .then(result => {
-          console.log(result);
-          if(result && result.authenticated){
-            this.router.navigateByUrl("/administration/manage");
-          }else{
-            if(setWrongPassword) {
-              this.wrongPassword = true;
+      if(this.username != undefined && this.password != undefined){
+        this.authService.login({username: this.username, password: this.password})
+          .then(result => {
+            console.log(result);
+            if(result && result.authenticated){
+              this.router.navigate(["/administration/manage", {outlets: {management: "profile"}}]);
+            }else{
+              if(setWrongPassword) {
+                this.wrongPassword = true;
+              }
             }
-          }
-          this.username = "";
-          this.password = "";
-        });
-    }
+            this.username = "";
+            this.password = "";
+          })
+          .catch(error => {
+            if(!error.status || error.status == 0){
+              this.router.navigateByUrl("error");
+            }
+            this.username = "";
+            this.password = "";
+          });
+      }
   }
 
 }

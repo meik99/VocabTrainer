@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+.full-width{
+  width: inherit;
+}
+
+.row{
+  margin-bottom: 10px;
+}
+
+[class^="col-"]{
+  margin-bottom: 10px;
+}
+

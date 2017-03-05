@@ -5,7 +5,9 @@ import {Schooltype} from "../../../models/Schooltype";
 @Component({
   selector: 'app-manage-types',
   templateUrl: './manage-types.component.html',
-  styleUrls: ['./manage-types.component.css']
+  styleUrls: [
+    './manage-types.component.css'
+  ]
 })
 export class ManageTypesComponent implements OnInit {
   private schooltypes: Schooltype[] = [];

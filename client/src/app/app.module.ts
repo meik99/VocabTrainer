@@ -26,6 +26,10 @@ import { ManageComponent } from './administration/manage/manage.component';
 import {AuthenticationService} from "./services/authentication.service";
 import {ManagementNavbarComponent} from './administration/navbar/navbar.component';
 import { ManageTypesComponent } from './administration/manage/manage-types/manage-types.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { ManageLevelsComponent } from './administration/manage/manage-levels/manage-levels.component';
+import { ManageUnitsComponent } from './administration/manage/manage-units/manage-units.component';
+import { ManageVocabsComponent } from './administration/manage/manage-vocabs/manage-vocabs.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { ManageTypesComponent } from './administration/manage/manage-types/manag
     LoginComponent,
     ManageComponent,
     ManagementNavbarComponent,
-    ManageTypesComponent
+    ManageTypesComponent,
+    ErrorPageComponent,
+    ManageLevelsComponent,
+    ManageUnitsComponent,
+    ManageVocabsComponent
   ],
   imports: [
     BrowserModule,

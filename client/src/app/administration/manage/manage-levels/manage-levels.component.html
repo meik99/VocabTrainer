@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12">
+      <h3>Schulstufe hinzufügen</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="dropdown">
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!type">Schultyp auswählen</span>
+        <span *ngIf="type"> {{type.description}}</span>
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let t of types">
+          <a href="#" (click)="type = t;" onclick="return false">{{t.description}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <span class="input-group full-width">
+      <input type="text" class="form-control" placeholder="1. Klasse" [(ngModel)]="schoollevel">
+    </span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-block btn-primary">Hinzufügen</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>Schulstufen bearbeiten</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-heading">Vorhandene Schulstufen</li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-8">
+            Lorem Ipsum
+          </div>
+          <div class="col-md-4" align="right">
+            <button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</button>
+            <button class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> Löschen</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

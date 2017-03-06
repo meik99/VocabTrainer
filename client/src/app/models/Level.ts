@@ -9,10 +9,7 @@ export class Level{
   constructor(
     public id: number,
     public description: string,
-    private schooltype_id: number,
-    private schooltypeService: SchooltypeService
+    public schooltype_id: number
   ){
-    schooltypeService.findSchooltypeById(this.schooltype_id)
-      .then(schooltype => this.schooltype = schooltype);
   }
 }

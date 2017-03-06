@@ -16,14 +16,6 @@ var connection = mysql.createConnection(
 );
 
 connection.connect();
-exports.findLevelsByType = function (typeId, callback) {
-    connection.query(mysql.format(queries.findLevelByType, [typeId]), function (error, results, fields) {
-        if(error) console.log(error);
-
-        callback(error, results, fields);
-    });
-};
-
 exports.findLanguagesByLevel = function (levelId, callback) {
     connection.query(mysql.format(queries.findLanguagesByLevel, [levelId, levelId]), function (error, results, fields) {
        if(error) console.log(error);
@@ -31,15 +23,6 @@ exports.findLanguagesByLevel = function (levelId, callback) {
        callback(error, results, fields);
     });
 };
-
-exports.findUnits = function (levelId, inputLangId, outputLangId, callback) {
-    connection.query(mysql.format(queries.findUnits, [levelId, inputLangId, outputLangId, inputLangId, outputLangId]), function (error, results, fields) {
-        if(error) console.log(error);
-
-        callback(error, results, fields);
-    });
-};
-
 exports.findVocabById = function (vocabId, callback) {
     connection.query(mysql.format(queries.findVocabById, [vocabId]), function (error, results, fields) {
         if(error) console.log(error);
@@ -136,6 +119,67 @@ exports.deleteSchooltype = function (type, callback) {
     connection.query(mysql.format(queries.deleteSchooltype, [type.id]), function () {
         exports.findSchooltypes(callback);
     });
+};
+
+//
+
+//Levels
+
+exports.findLevels = function (callback) {
+    connection.query(mysql.format(queries.findLevels), callback);
+};
+
+exports.findLevelsByType = function (typeId, callback) {
+    connection.query(mysql.format(queries.findLevelByType, [typeId]), function (error, results, fields) {
+        if(error) console.log(error);
+
+        callback(error, results, fields);
+    });
+};
+
+exports.createLevel = function (level, callback) {
+    connection.query(
+        mysql.format(queries.createLevel, [level.description, level.schooltype_id]),
+        exports.findLevels(callback)
+    );
+};
+
+exports.updateLevel = function (level, callback) {
+    connection.query(
+        mysql.format(queries.updateLevel, [level.description, level.schooltype_id, level.id]),
+        exports.findLevels(callback)
+    );
+};
+
+exports.deleteLevel = function (level, callback) {
+    connection.query(
+        mysql.format(queries.deleteLevel, [level.id]),
+        exports.findLevels(callback)
+    );
+};
+
+//
+
+//Units
+
+exports.findUnits = function (levelId, inputLangId, outputLangId, callback) {
+    connection.query(mysql.format(queries.findUnits, [levelId, inputLangId, outputLangId, inputLangId, outputLangId]), function (error, results, fields) {
+        if(error) console.log(error);
+
+        callback(error, results, fields);
+    });
+};
+
+exports.findAllUnits = function (callback) {
+    connection.query(mysql.format(queries.findAllUnits), callback);
+};
+
+exports.findUnitsByLevel = function (level, callback) {
+    connection.query(mysql.format(queries.findUnitsByLevel, [level.id]), callback);
+};
+
+exports.findUnitsByType = function (type, callback) {
+    connection.query(mysql.format(queries.findUnitsByType, [type.id]), callback);
 };
 
 //

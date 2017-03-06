@@ -1,30 +1,40 @@
 {
   "findSchooltypes":
-          "select id, description from schooltype",
+  "select id, description from schooltype",
   "findSchooltypeById":
-          "select id, description from schooltype where id = ?",
-  "findLevelByType":
-          "select id, description, schooltype_id from schoollevel where schooltype_id = ?",
-  "findLanguageById":
-          "select id, description from language where id = ?;",
-  "findLanguagesByLevel":
-          "select language.id id, language.description description from language where language.id IN (select language_id from word where word.id IN (select word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?)) union all select foreign_word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?))));",
-  "findUnits":
-          "select unit.id, unit.description, unit.trivia from unit where unit.id in (select level_unit.unit_id from level_unit where level_unit.schoollevel_id = ?) and unit.id in(select unit_vocab.unit_id from unit_vocab where unit_vocab.vocab_id in(select vocab.id from vocab where vocab.word_id in(select word.id from word where word.language_id = ? or word.language_id = ?) or vocab.foreign_word_id in(select word.id from word where word.language_id = ? or word.language_id = ?)));",
-  "findVocabById":
-          "select id, word_id, foreign_word_id from vocab where id = ?;",
-  "findVocabsByUnit":
-          "select id, word_id, foreign_word_id from vocab where vocab.id IN (select vocab_id from unit_vocab where unit_id = ?);",
-  "findWordsByVocab":
-          "select id, language_id, word from word where id = ? or id = ?;",
-  "findWordById":
-          "select id, language_id, word from word where id = ?;",
-  "findUserByUsername":
-          "select id, username, password_hash, token, tokentime from account where username like ?;",
+  "select id, description from schooltype where id = ?",
   "createSchooltype":
-          "insert into schooltype values(NULL, ?);",
+  "insert into schooltype values(NULL, ?);",
   "updateSchooltype":
-          "update schooltype set description = ? where id = ?",
+  "update schooltype set description = ? where id = ?",
   "deleteSchooltype":
-          "delete from schooltype where id = ?"
+  "delete from schooltype where id = ?",
+
+  "findLevelByType":
+  "select id, description, schooltype_id from schoollevel where schooltype_id = ?",
+  "findLevels":
+  "select id, description, schooltype_id from schoollevel;",
+  "createLevel":
+  "insert into schoollevel values(NULL, ?, ?);",
+  "updateLevel":
+  "update schoollevel set description = ?, schooltype_id = ? where id = ?",
+  "deleteLevel":
+  "delete from schoollevel where id = ?",
+
+  "findAllUnits":
+  "select id, description, trivia from unit",
+  "findUnits":
+  "select unit.id, unit.description, unit.trivia from unit where unit.id in (select level_unit.unit_id from level_unit where level_unit.schoollevel_id = ?) and unit.id in(select unit_vocab.unit_id from unit_vocab where unit_vocab.vocab_id in(select vocab.id from vocab where vocab.word_id in(select word.id from word where word.language_id = ? or word.language_id = ?) or vocab.foreign_word_id in(select word.id from word where word.language_id = ? or word.language_id = ?)));",
+  "findUnitsByType":
+  "select unit.id, unit.description, unit.trivia from unit where unit.id in (select level_unit.unit_id from level_unit where level_unit.schoollevel_id in (select schoollevel.id from schoollevel where schoollevel.schooltype_id = ?));",
+  "findUnitsByLevel":
+  "select id, description, trivia from unit where id in (select unit_id from level_unit where schoollevel_id = ?);",
+
+  "findLanguageById": "select id, description from language where id = ?;",
+  "findLanguagesByLevel": "select language.id id, language.description description from language where language.id IN (select language_id from word where word.id IN (select word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?)) union all select foreign_word_id from vocab where id IN (select vocab_id from unit_vocab where unit_id IN (select unit_id from level_unit where schoollevel_id = ?))));",
+  "findVocabById": "select id, word_id, foreign_word_id from vocab where id = ?;",
+  "findVocabsByUnit": "select id, word_id, foreign_word_id from vocab where vocab.id IN (select vocab_id from unit_vocab where unit_id = ?);",
+  "findWordsByVocab": "select id, language_id, word from word where id = ? or id = ?;",
+  "findWordById": "select id, language_id, word from word where id = ?;",
+  "findUserByUsername": "select id, username, password_hash, token, tokentime from account where username like ?;"
 }

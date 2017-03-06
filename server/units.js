@@ -22,5 +22,29 @@ module.exports = function(app){
             response.send([]);
         }
 
-    })
-}
+    });
+
+    app.get(endpoints.units, function (request, response) {
+       database.findAllUnits(function(err, result, fields){
+            if(err) throw err;
+
+            response.send(result);
+       });
+    });
+
+    app.post(endpoints.unitByLevel, function (request, response) {
+        database.findUnitsByLevel(request.body, function(err, results, fields){
+            if(err) throw err;
+
+            response.send(results);
+        });
+    });
+
+    app.post(endpoints.unitBySchooltype, function (request, response) {
+        database.findUnitsByType(request.body, function (err, result, fields) {
+            if(err) throw err;
+
+            response.send(result);
+        });
+    });
+};

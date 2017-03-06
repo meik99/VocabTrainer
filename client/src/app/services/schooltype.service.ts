@@ -44,11 +44,7 @@ export class SchooltypeService extends BaseService{
   }
 
   deleteSchooltype(schooltype: Schooltype): Promise<Schooltype[]>{
-    let deleteOptions: RequestOptions = new RequestOptions();
-    deleteOptions.headers = this.requestOptions.headers;
-    deleteOptions.body = schooltype;
-
-    return this.http.delete(this.typesUrl, deleteOptions)
+    return this.http.delete(this.typesUrl, this.makeRequestOptionsWithBody(schooltype))
       .toPromise()
       .then(result => result.json() as Schooltype[])
       .catch(this.handleError);

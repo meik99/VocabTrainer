@@ -4,8 +4,6 @@ import {Http} from "@angular/http";
 import {Schooltype} from "../models/Schooltype";
 import {Level} from "../models/Level";
 import {Language} from "../models/Language";
-import {URL_BASE} from "../config";
-
 @Injectable()
 export class LanguageService extends BaseService{
   languagesUrl = this.URL_BASE + "languages";

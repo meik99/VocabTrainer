@@ -26,4 +26,14 @@ export abstract class BaseService {
     throw error;
   }
 
+  makeRequestOptionsWithBody(body: any) : RequestOptions{
+    let requestOptions = new RequestOptions();
+
+    requestOptions.headers = new Headers();
+    requestOptions.headers.append("Content-Type", "application/json");
+    requestOptions.body = body;
+
+    return requestOptions;
+  }
+
 }

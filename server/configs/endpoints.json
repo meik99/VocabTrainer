@@ -3,14 +3,22 @@
           "/vocabtrainer/api/schooltypes",
   "typeById":
           "/vocabtrainer/api/schooltype/:id",
+  "levels":
+          "/vocabtrainer/api/schoollevels",
   "levelByTypeId":
           "/vocabtrainer/api/schoollevels/:typeId",
   "languageById":
           "/vocabtrainer/api/language/:languageId",
   "languageByLevelId":
           "/vocabtrainer/api/languages/:levelId",
+  "units":
+          "/vocabtrainer/api/units",
   "unitByLevelLanguage":
           "/vocabtrainer/api/units/:levelId/:inputLanguageId/:outputLanguageId",
+  "unitBySchooltype":
+          "/vocabtrainer/api/units/schooltype",
+  "unitByLevel":
+          "/vocabtrainer/api/units/schoollevel",
   "vocabsByUnitId":
           "/vocabtrainer/api/vocabs/:unitId",
   "wordsByVocabId":

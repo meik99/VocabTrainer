@@ -11,22 +11,29 @@
         <span *ngIf="type"> {{type.description}}</span>
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
+        <li><a href="#" (click)="type = null; updateLevelList()" onclick="return false;">Alle</a></li>
         <li *ngFor="let t of types">
-          <a href="#" (click)="type = t;" onclick="return false">{{t.description}}</a>
+          <a href="#" (click)="type = t; updateLevelList()" onclick="return false">{{t.description}}</a>
         </li>
       </ul>
     </div>
   </div>
   <div class="col-md-12">
     <span class="input-group full-width">
-      <input type="text" class="form-control" placeholder="1. Klasse" [(ngModel)]="schoollevel">
+      <input *ngIf="type"
+        type="text" class="form-control" placeholder="1. Klasse"
+        [(ngModel)]="schoollevel">
+
+      <input *ngIf="!type"
+             type="text" class="form-control" placeholder="1. Klasse"
+             readonly>
     </span>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <button class="btn btn-block btn-primary">Hinzufügen</button>
+    <button class="btn btn-block btn-primary" (click)="create()">Hinzufügen</button>
   </div>
 </div>
 
@@ -39,14 +46,61 @@
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-heading">Vorhandene Schulstufen</li>
-      <li class="list-group-item">
+      <li class="list-group-item" *ngFor="let level of levels">
         <div class="row">
           <div class="col-md-8">
-            Lorem Ipsum
+            <span *ngIf="!schoollevelToUpdate || schoollevelToUpdate !== level">
+              {{level.description}}
+
+              -
+
+              {{getType(level).description}}
+            </span>
+            <span *ngIf="schoollevelToUpdate && schoollevelToUpdate === level">
+              <input
+                     type="text" class="form-control" placeholder="1. Klasse"
+                     [(ngModel)]="updatedLevelname">
+               <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                  <span *ngIf="!updatedLeveltype">Schultyp auswählen</span>
+                  <span *ngIf="updatedLeveltype"> {{updatedLeveltype.description}}</span>
+                  <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let t of allTypes">
+                    <a href="#" (click)="updatedLeveltype = t" onclick="return false">
+                      {{t.description}}
+                    </a>
+                  </li>
+                </ul>
+            </span>
           </div>
           <div class="col-md-4" align="right">
-            <button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</button>
-            <button class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> Löschen</button>
+            <button class="btn btn-default" (click)="setToUpdate(level)"
+                    *ngIf="(!schoollevelToUpdate || schoollevelToUpdate !== level) && (!schoollevelToDelete || schoollevelToDelete !== level)">
+              <span class="glyphicon glyphicon-edit"></span> Bearbeiten
+            </button>
+
+            <button class="btn btn-success" (click)="update(level)"
+                    *ngIf="schoollevelToUpdate && schoollevelToUpdate === level">
+              <span class="glyphicon glyphicon-edit"></span> Speichern
+            </button>
+
+            <button class="btn btn-default" (click)="setToDelete(level)"
+                    *ngIf="(!schoollevelToDelete || schoollevelToDelete !== level) && (!schoollevelToUpdate || schoollevelToUpdate !== level)">
+              <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+
+            <button class="btn btn-danger" (click)="delete(level)"
+                    *ngIf="schoollevelToDelete && schoollevelToDelete === level">
+              <span class="glyphicon glyphicon-trash"></span> Sicher
+            </button>
+
+            <button class="btn" [class.btn-success]="schoollevelToDelete" [class.btn-danger]="schoollevelToUpdate"
+                    (click)="cancel()"
+                    *ngIf="
+                    schoollevelToDelete && schoollevelToDelete === level||
+                    schoollevelToUpdate && schoollevelToUpdate === level">
+              Abbrechen
+            </button>
           </div>
         </div>
       </li>

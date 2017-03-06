@@ -4,6 +4,7 @@ import {Http} from "@angular/http";
 import {Level} from "../models/Level";
 import {Language} from "../models/Language";
 import {Unit} from "../models/Unit";
+import {Schooltype} from "../models/Schooltype";
 
 @Injectable()
 export class UnitService extends BaseService{
@@ -18,5 +19,30 @@ export class UnitService extends BaseService{
       .toPromise()
       .then(response => response.json() as Unit[])
       .catch(this.handleError);
+  }
+
+  findAllUnits(): Promise<Unit[]>{
+    return this.http.get(this.URL_BASE)
+      .toPromise()
+      .then(response => response.json() as Unit[])
+      .catch(this.handleError);
+  }
+
+  findUnitsByLevel(level: Level): Promise<Unit[]>{
+    return this.http.post(
+      `${this.URL_BASE}/schoollevel`, level, this.requestOptions
+    )
+    .toPromise()
+    .then(response => response.json() as Unit[])
+    .catch(this.handleError);
+  }
+
+  findUnitsByType(type: Schooltype): Promise<Unit[]>{
+    return this.http.post(
+        `${this.URL_BASE}/schooltype`, type, this.requestOptions
+    )
+    .toPromise()
+    .then(response => response.json() as Unit[])
+    .catch(this.handleError);
   }
 }

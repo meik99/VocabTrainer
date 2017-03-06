@@ -6,42 +6,48 @@
 <div class="row">
   <div class="col-md-3">
     <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Schultyp auswählen
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!filterType">
+          Schultyp auswählen
+        </span>
+        <span *ngIf="filterType">
+          {{filterType.description}}
+        </span>
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Schulstufe auswählen
-        <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ausgangssprache auswählen
-        <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
         <li>
-          <input class="form-control" type="text" placeholder="Deutsch">
+          <a href="#" (click)="setFilterType(null)" onclick="return false;">
+            Alle
+          </a>
+        </li>
+        <li *ngFor="let t of getTypes()">
+          <a href="#" (click)="setFilterType(t)" onclick="return false;">
+            {{t.description}}
+          </a>
         </li>
       </ul>
     </div>
   </div>
   <div class="col-md-3">
     <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Fremdsprache auswählen
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!filterLevel">
+          Schulstufe auswählen
+        </span>
+        <span *ngIf="filterLevel">
+          {{filterLevel.description}}
+        </span>
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
         <li>
-          <input class="form-control" type="text" placeholder="Deutsch">
+          <a href="#" (click)="setFilterLevel(null)" onclick="return false;">
+            Alle
+          </a>
+        </li>
+        <li *ngFor="let l of getLevels()">
+          <a href="#" (click)="setFilterLevel(l)" onclick="return false;">
+            {{l.description}}
+          </a>
         </li>
       </ul>
     </div>
@@ -50,7 +56,11 @@
 <div class="row">
   <div class="col-md-12">
     <span class="input-group full-width">
-      <input type="text" class="form-control" placeholder="Unit 1" [(ngModel)]="unitname">
+      <input type="text" class="form-control" *ngIf="filterLevel"
+             placeholder="Unit 1" [(ngModel)]="unitname">
+
+      <input type="text" class="form-control" *ngIf="!filterLevel"
+             placeholder="Unit 1" readonly>
     </span>
   </div>
 </div>
@@ -71,9 +81,9 @@
     <ul class="list-group">
       <li class="list-group-item list-group-item-heading">Vorhandene Schulstufen</li>
       <li class="list-group-item">
-        <div class="row">
+        <div class="row" *ngFor="let u of filteredUnits">
           <div class="col-md-8">
-            Lorem Ipsum
+            {{u.description}}
           </div>
           <div class="col-md-4" align="right">
             <button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</button>

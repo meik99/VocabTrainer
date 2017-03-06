@@ -18,4 +18,31 @@ export class SchoollevelService extends BaseService{
       .catch(this.handleError);
   }
 
+  findSchoollevels(): Promise<Level[]>{
+    return this.http.get(this.levelurl)
+      .toPromise()
+      .then(result => result.json() as Level[])
+      .catch(this.handleError);
+  }
+
+  createLevel(level: Level): Promise<Level[]>{
+    return this.http.post(this.levelurl, level, this.requestOptions)
+      .toPromise()
+      .then(result => result.json() as Level[])
+      .catch(this.handleError);
+  }
+
+  updateLevel(level: Level): Promise<Level[]>{
+    return this.http.put(this.levelurl, level, this.requestOptions)
+      .toPromise()
+      .then(result => result.json() as Level[])
+      .catch(this.handleError);
+  }
+
+  deleteLevel(level: Level): Promise<Level[]>{
+    return this.http.delete(this.levelurl, this.makeRequestOptionsWithBody(level))
+      .toPromise()
+      .then(result => result.json() as Level[])
+      .catch(this.handleError);
+  }
 }

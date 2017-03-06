@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 
 import "rxjs/add/operator/toPromise"
-import {URL_BASE} from "../config";
+import {environment} from "../../environments/environment";
+import {RequestOptions, Headers} from "@angular/http";
 
 @Injectable()
 export abstract class BaseService {
-  URL_BASE: string = URL_BASE;
+  URL_BASE: string = environment.urlbase;
+  requestOptions: RequestOptions;
 
-  constructor() { }
+  constructor() {
+    this.requestOptions = new RequestOptions();
+    this.requestOptions.headers = new Headers();
+    this.requestOptions.headers.append("Content-Type", "application/json");
+  }
 
   handleError(error: any){
     if(error.message){

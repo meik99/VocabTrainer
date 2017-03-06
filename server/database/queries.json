@@ -20,6 +20,11 @@
   "findWordById":
           "select id, language_id, word from word where id = ?;",
   "findUserByUsername":
-          "select id, username, password_hash, token, tokentime from account where username like ?;"
-
+          "select id, username, password_hash, token, tokentime from account where username like ?;",
+  "createSchooltype":
+          "insert into schooltype values(NULL, ?);",
+  "updateSchooltype":
+          "update schooltype set description = ? where id = ?",
+  "deleteSchooltype":
+          "delete from schooltype where id = ?"
 }

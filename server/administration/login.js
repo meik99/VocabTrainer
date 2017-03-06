@@ -54,7 +54,6 @@ module.exports = function (app) {
 
     app.post(endpoints.login, passport.authenticate("local"),
         function (request, response) {
-            console.log("authenticated");
             if(request.user){
                 response.send({username: request.user.username, authenticated: true});
             }else{
@@ -71,7 +70,6 @@ module.exports = function (app) {
     });
 
     app.get(endpoints.loginFailure, function (request, response) {
-        console.log("failure");
        response.send({username: null, authenticated: false});
     });
 };

@@ -1,20 +1,24 @@
+var production = false;
+
 var express = require("express");
 var bodyparser = require("body-parser");
+var passport = require("passport");
 var cors = require("cors");
+
 var database = require("./database/dbconnector");
 var server_properties = require("./configs/server_properties.json");
 var endpoints = require("./configs/endpoints.json");
-var passport = require("passport");
-var serverconfig = require("./configs/server_properties.json");
-var fs = require('fs');
-var https = require('https');
-var certificates = require("./configs/confidential/certificate.json");
 
-var privateKey  = fs.readFileSync(certificates.privkey, 'utf8');
-var certificate = fs.readFileSync(certificates.cert, 'utf8');
-
-var credentials = {key: privateKey, cert: certificate};
-
+if(production){
+    var https = require('https');
+    var fs = require('fs');
+    var certificates = require("./configs/confidential/certificate.json");
+    var privateKey  = fs.readFileSync(certificates.privkey, 'utf8');
+    var certificate = fs.readFileSync(certificates.cert, 'utf8');
+    var credentials = {key: privateKey, cert: certificate};
+}else{
+    var http = require('http');
+}
 var app = express();
 
 app.use(bodyparser.json());
@@ -47,6 +51,10 @@ require("./vocabs")(app);
 require("./words")(app);
 require("./administration/login")(app);
 
-var httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(server_properties.port);
+if(production) {
+    var httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(server_properties.port);
+}else{
+    var httpServer = http.createServer(app);
+    httpServer.listen(server_properties.port);
+}

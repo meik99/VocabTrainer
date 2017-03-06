@@ -13,6 +13,10 @@ export class ManageTypesComponent implements OnInit {
   private schooltypes: Schooltype[] = [];
 
   private schooltype: string = "";
+  private schooltypeUpdateDescription: string = "";
+
+  private schooltypeToDelete: Schooltype = null;
+  private schooltypeToUpdate: Schooltype = null;
 
   constructor(
     private typeService: SchooltypeService
@@ -28,4 +32,37 @@ export class ManageTypesComponent implements OnInit {
       .sort((a,b) => a.description.localeCompare(b.description));
   }
 
+  create(){
+    if(this.schooltype){
+      this.typeService.createSchooltype(new Schooltype(-1, this.schooltype))
+        .then(result => this.schooltypes = result)
+        .then(() => this.schooltype = "");
+    }
+  }
+
+  update(schooltype: Schooltype){
+    schooltype.description = this.schooltypeUpdateDescription;
+    this.typeService.updateSchooltype(schooltype)
+      .then(result => this.schooltypes = result);
+  }
+
+  setToUpdate(schooltype: Schooltype){
+    this.schooltypeUpdateDescription = schooltype.description;
+    this.schooltypeToUpdate = schooltype;
+  }
+
+  delete(schooltype: Schooltype){
+    this.schooltypeToDelete = null;
+    this.typeService.deleteSchooltype(schooltype)
+      .then(result => this.schooltypes = result);
+  }
+
+  setToDelete(schooltype: Schooltype){
+    this.schooltypeToDelete = schooltype;
+  }
+
+  cancel(){
+    this.schooltypeToDelete = null;
+    this.schooltypeToUpdate = null;
+  }
 }

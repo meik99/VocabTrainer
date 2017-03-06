@@ -16,23 +16,6 @@ var connection = mysql.createConnection(
 );
 
 connection.connect();
-
-exports.findSchooltypes = function(callback){
-    connection.query(queries.findSchooltypes, function(error, results, fields){
-       if(error) console.log(error);
-
-       callback(error, results, fields);
-    });
-};
-
-exports.findSchooltypeById = function (typeId, callback) {
-    connection.query(mysql.format(queries.findSchooltypeById, [typeId]), function (error, results, fields) {
-       if(error) console.log(error);
-
-       callback(error, results, fields);
-    });
-};
-
 exports.findLevelsByType = function (typeId, callback) {
     connection.query(mysql.format(queries.findLevelByType, [typeId]), function (error, results, fields) {
         if(error) console.log(error);
@@ -116,3 +99,43 @@ exports.findUser = function (username, callback) {
         callback(error, results, fields);
     });
 };
+
+//CRUD
+//Schooltype
+
+exports.findSchooltypes = function(callback){
+    connection.query(queries.findSchooltypes, function(error, results, fields){
+        if(error) console.log(error);
+
+        callback(error, results, fields);
+    });
+};
+
+exports.findSchooltypeById = function (typeId, callback) {
+    connection.query(mysql.format(queries.findSchooltypeById, [typeId]), function (error, results, fields) {
+        if(error) console.log(error);
+
+        callback(error, results, fields);
+    });
+};
+
+exports.createSchooltype = function (type, callback) {
+    connection.query(mysql.format(queries.createSchooltype, [type.description]), function(){
+        exports.findSchooltypes(callback);
+    });
+};
+
+exports.updateSchooltype = function (type, callback) {
+    connection.query(mysql.format(queries.updateSchooltype, [type.description, type.id]),
+        function () {
+            exports.findSchooltypes(callback);
+    });
+};
+
+exports.deleteSchooltype = function (type, callback) {
+    connection.query(mysql.format(queries.deleteSchooltype, [type.id]), function () {
+        exports.findSchooltypes(callback);
+    });
+};
+
+//

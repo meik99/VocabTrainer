@@ -2,13 +2,13 @@
   <div class="col-md-12">
     <h3>Schultyp hinzufügen</h3>
     <div class="input-group full-width">
-      <input class="form-control" type="text" placeholder="HTL" id="schooltype" [(ngModel)]="schooltype">
+      <input class="form-control" type="text" placeholder="HTL" [(ngModel)]="schooltype">
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <button class="btn btn-block btn-primary">Hinzufügen</button>
+    <button class="btn btn-block btn-primary" (click)="create()">Hinzufügen</button>
   </div>
 </div>
 <div class="row">
@@ -19,14 +19,49 @@
       <li class="list-group-item" *ngFor="let type of getSchooltypes()">
         <div class="row">
           <div class="col-md-8">
-            {{type.description}}
+            <span *ngIf="!schooltypeToUpdate || schooltypeToUpdate !== type">
+              {{type.description}}
+            </span>
+            <span *ngIf="schooltypeToUpdate && schooltypeToUpdate === type">
+              <div class="input-group full-width">
+                <input class="form-control" type="text"
+                       placeholder="{{type.description}}" [(ngModel)]="schooltypeUpdateDescription">
+              </div>
+            </span>
           </div>
           <div class="col-md-4" align="right">
-            <button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</button>
-            <button class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> Löschen</button>
+            <button class="btn btn-default" (click)="setToUpdate(type)"
+                    *ngIf="(!schooltypeToUpdate || schooltypeToUpdate !== type) && (!schooltypeToDelete || schooltypeToDelete !== type)">
+              <span class="glyphicon glyphicon-edit"></span> Bearbeiten
+            </button>
+
+            <button class="btn btn-success" (click)="update(type)"
+                    *ngIf="schooltypeToUpdate && schooltypeToUpdate === type">
+              <span class="glyphicon glyphicon-edit"></span> Speichern
+            </button>
+
+            <button class="btn btn-default" (click)="setToDelete(type)"
+                    *ngIf="(!schooltypeToDelete || schooltypeToDelete !== type) && (!schooltypeToUpdate || schooltypeToUpdate !== type)">
+              <span class="glyphicon glyphicon-trash"></span> Löschen
+            </button>
+
+            <button class="btn btn-danger" (click)="delete(type)"
+                    *ngIf="schooltypeToDelete && schooltypeToDelete === type">
+              <span class="glyphicon glyphicon-trash"></span> Sicher
+            </button>
+
+            <button class="btn" [class.btn-success]="schooltypeToDelete" [class.btn-danger]="schooltypeToUpdate"
+                    (click)="cancel()"
+                    *ngIf="
+                    schooltypeToDelete && schooltypeToDelete === type||
+                    schooltypeToUpdate && schooltypeToUpdate === type">
+              Abbrechen
+            </button>
           </div>
         </div>
       </li>
     </ul>
   </div>
 </div>
+
+

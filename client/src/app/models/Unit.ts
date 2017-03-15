@@ -9,8 +9,7 @@ export class Unit{
   constructor(
     public id: number,
     public description: string,
-    public trivia: string,
-    private vocabService: VocabService
+    public trivia: string
   ){
 
   }

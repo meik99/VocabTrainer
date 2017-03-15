@@ -47,4 +47,11 @@ module.exports = function(app){
             response.send(result);
         });
     });
+
+    app.post(endpoints.units, function (request, response) {
+       database.createUnit(request.body.unit, request.body.level, function (err, result, fields) {
+            if(err) throw err;
+            response.send(result);
+       }) ;
+    });
 };

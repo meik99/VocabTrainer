@@ -62,6 +62,7 @@ export class ManageUnitsComponent implements OnInit {
   }
 
   setFilterType(type: Schooltype){
+    this.unitname = null;
     this.filterType = type;
     this.filteredUnits = [];
 
@@ -76,6 +77,7 @@ export class ManageUnitsComponent implements OnInit {
 
   setFilterLevel(level: Level){
     this.filterLevel = level;
+    this.unitname = null;
 
     if(level) {
       this.filteredUnits = [];
@@ -88,6 +90,15 @@ export class ManageUnitsComponent implements OnInit {
       }else{
         this.filteredUnits = this.units;
       }
+    }
+  }
+
+  createUnit(){
+    if(this.unitname && this.filterLevel){
+      this.unitService.postUnit(
+        new Unit(-1, this.unitname, null),
+        this.filterLevel
+      ).then(response => this.units = response);
     }
   }
 

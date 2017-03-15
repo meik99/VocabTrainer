@@ -45,4 +45,13 @@ export class UnitService extends BaseService{
     .then(response => response.json() as Unit[])
     .catch(this.handleError);
   }
+
+  postUnit(unit: Unit, level: Level): Promise<Unit[]>{
+    return this.http.post(
+      this.URL_BASE, {unit: unit, level: level}, this.requestOptions
+    )
+      .toPromise()
+      .then(response => response.json() as Unit[])
+      .catch(this.handleError);
+  }
 }

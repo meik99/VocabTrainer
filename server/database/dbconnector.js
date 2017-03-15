@@ -182,4 +182,9 @@ exports.findUnitsByType = function (type, callback) {
     connection.query(mysql.format(queries.findUnitsByType, [type.id]), callback);
 };
 
+exports.createUnit = function (unit, level, callback) {
+    connection.query(mysql.format(queries.createUnit, [unit.description, unit.trivia, level.id]),
+        exports.findUnitsByLevel(level, callback));
+}
+
 //

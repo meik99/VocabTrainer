@@ -9,7 +9,8 @@ var dbconfig = {
     host: "localhost",
     user: "root",
     password: "root",
-    database: "vocabDB"
+    database: "vocabDB",
+    multipleStatements: true
 };
 var connection = mysql.createConnection(
     dbconfig
@@ -184,7 +185,7 @@ exports.findUnitsByType = function (type, callback) {
 
 exports.createUnit = function (unit, level, callback) {
     connection.query(mysql.format(queries.createUnit, [unit.description, unit.trivia, level.id]),
-        exports.findUnitsByLevel(level, callback));
+        callback);
 }
 
 //

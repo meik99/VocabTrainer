@@ -46,4 +46,8 @@ export class AuthenticationService extends BaseService{
     }
   }
 
+  logout(){
+    localStorage.removeItem("user");
+  }
+
 }

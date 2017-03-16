@@ -51,7 +51,10 @@ module.exports = function(app){
     app.post(endpoints.units, function (request, response) {
        database.createUnit(request.body.unit, request.body.level, function (err, result, fields) {
             if(err) throw err;
-            response.send(result);
+            database.findUnitsByLevel(request.body.level, function(err, result, fields){
+                if(err) throw err;
+                response.send(result);
+            });
        }) ;
     });
 };

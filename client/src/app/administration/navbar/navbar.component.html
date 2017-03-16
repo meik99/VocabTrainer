@@ -17,6 +17,9 @@
       <li class="list-group-item" [routerLink]="['/administration/manage', {outlets: {management: ['vocabs']}}]" routerLinkActive="active">
         Vokabeln
       </li>
+      <li class="list-group-item" (click)="logout()">
+        Abmelden
+      </li>
     </ul>
   </div>
   <div class="col-md-9 col-lg-10 col-sm-8 col-xs-12">

@@ -98,7 +98,11 @@ export class ManageUnitsComponent implements OnInit {
       this.unitService.postUnit(
         new Unit(-1, this.unitname, null),
         this.filterLevel
-      ).then(response => this.units = response);
+      ).then(response => {
+        this.units = response
+        this.setFilterType(this.filterType);
+        this.setFilterLevel(this.filterLevel);
+      });
     }
   }
 

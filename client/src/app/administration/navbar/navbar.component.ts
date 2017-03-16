@@ -1,5 +1,6 @@
 import {Component, OnInit, OnChanges, SimpleChanges, AfterViewInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-management-navbar',
@@ -8,7 +9,10 @@ import {Router} from "@angular/router";
 })
 export class ManagementNavbarComponent implements OnInit, OnChanges, AfterViewInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ) { }
 
   ngOnInit() {
   }
@@ -19,5 +23,8 @@ export class ManagementNavbarComponent implements OnInit, OnChanges, AfterViewIn
   ngAfterViewInit(): void {
   }
 
-
+  logout(){
+    this.authService.logout();
+    this.router.navigate(["administration"]);
+  }
 }

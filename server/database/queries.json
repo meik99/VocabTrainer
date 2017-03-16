@@ -30,7 +30,7 @@
   "findUnitsByLevel":
   "select id, description, trivia from unit where id in (select unit_id from level_unit where schoollevel_id = ?);",
   "createUnit":
-  "insert into unit values(NULL, ?, ?);insert into level_unit select ?, LAST_INSERT_ID() from dual;",
+  "insert into unit values(NULL, ?, ?); insert into level_unit values (?, LAST_INSERT_ID());",
 
 
   "findLanguageById": "select id, description from language where id = ?;",

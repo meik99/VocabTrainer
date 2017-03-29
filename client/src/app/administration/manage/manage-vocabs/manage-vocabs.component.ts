@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SchooltypeService} from "../../../services/schooltype.service";
 import {SchoollevelService} from "../../../services/schoollevel.service";
 import {LanguageService} from "../../../services/language.service";
@@ -15,12 +15,19 @@ import {Vocab} from "../../../models/Vocab";
   templateUrl: './manage-vocabs.component.html',
   styleUrls: ['./manage-vocabs.component.css']
 })
-export class ManageVocabsComponent implements OnInit {
+export class ManageVocabsComponent implements OnInit, OnChanges {
   private types: Schooltype[];
   private levels: Level[];
   private languages: Language[];
   private units: Unit[];
   private vocabs: Vocab[];
+
+
+  private filterType: Schooltype = null;
+  private filterLevel: Schooltype = null;
+  private filterLanguage: Schooltype = null;
+  private filterForeignLanguage: Schooltype = null;
+  private filterUnit: Schooltype = null;
 
 
   constructor(
@@ -34,4 +41,6 @@ export class ManageVocabsComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+  }
 }

@@ -20,25 +20,4 @@ export class VocabService extends BaseService{
       .catch(this.handleError);
   }
 
-  populateVocab(vocab: Vocab): Promise<Vocab>{
-    return Promise.resolve( v => {
-          v = new Vocab(vocab.id, vocab.word_id, vocab.foreign_word_id)
-          v.loadWords();
-          return v;
-        }
-      )
-      .catch(this.handleError);
-  }
-
-  populateVocabs(vocabs: Vocab[]): Promise<Vocab[]> {
-    return new Promise((resolve, reject) => {
-      let populatedVocabs: Vocab[] = [];
-      vocabs.forEach(v => {
-          this.populateVocab(v)
-          .then(result => {
-            populatedVocabs.push(result);
-          });
-      });
-    });
-  }
 }

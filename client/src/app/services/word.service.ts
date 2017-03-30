@@ -28,13 +28,4 @@ export class WordService extends BaseService{
       .catch(this.handleError);
   }
 
-  populateWord(word: Word): Promise<Word>{
-    return Promise.resolve(
-      w => {
-        w = new Word(word.id, word.word, word.language_id);
-        w.loadWord();
-        return w;
-      }
-    )
-  }
 }

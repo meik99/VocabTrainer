@@ -3,70 +3,140 @@
     <h3>Vokabel hinzufügen</h3>
   </div>
 </div>
+
 <div class="row">
   <div class="col-md-3">
     <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Schultyp auswählen
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!filterType">
+          Schultyp auswählen
+        </span>
+        <span *ngIf="filterType">
+          {{filterType.description}}
+        </span>
+
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
+        <li *ngFor="let type of types">
+          <a href="" onclick="return false;" (click)="filterType = type" >{{type.description}}</a>
+        </li>
+        <li>
+          <a href="" onclick="return false;" (click)="filterType = null">----</a>
+        </li>
       </ul>
     </div>
   </div>
+
   <div class="col-md-3">
     <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Schulstufe auswählen
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!filterLevel">
+          Schulstufe auswählen
+        </span>
+        <span *ngIf="filterLevel">
+          {{filterLevel.description}}
+        </span>
+
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
+        <li *ngFor="let level of levels">
+          <a href="" onclick="return false;" (click)="filterLevel = level" >{{level.description}}</a>
+        </li>
+        <li>
+          <a href="" onclick="return false;" (click)="filterLevel = null">----</a>
+        </li>
       </ul>
     </div>
   </div>
+
   <div class="col-md-3">
     <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ausgangssprache auswählen
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!filterLanguage">
+          Sprache auswählen
+        </span>
+        <span *ngIf="filterLanguage">
+          {{filterLanguage.description}}
+        </span>
+
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
+        <li *ngFor="let language of languages">
+          <a href="" onclick="return false;" (click)="filterLanguage = language" >{{language.description}}</a>
+        </li>
+        <li>
+          <a href="" onclick="return false;" (click)="filterLanguage = null">----</a>
+        </li>
         <li>
           <input class="form-control" type="text" placeholder="Deutsch">
         </li>
       </ul>
     </div>
   </div>
+
   <div class="col-md-3">
     <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Fremdsprache auswählen
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!filterForeignLanguage">
+          Fremdsprache auswählen
+        </span>
+        <span *ngIf="filterForeignLanguage">
+          {{filterForeignLanguage.description}}
+        </span>
+
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
+        <li *ngFor="let language of foreignLanguages">
+          <a href="" onclick="return false;" (click)="filterForeignLanguage = language" >{{language.description}}</a>
+        </li>
+        <li>
+          <a href="" onclick="return false;" (click)="filterForeignLanguage = null">----</a>
+        </li>
         <li>
           <input class="form-control" type="text" placeholder="Deutsch">
         </li>
       </ul>
     </div>
   </div>
+
   <div class="col-md-3">
     <div class="dropdown">
-      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Einheit auswählen
+      <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span *ngIf="!filterUnit">
+          Einheit auswählen
+        </span>
+        <span *ngIf="filterUnit">
+          {{filterUnit.description}}
+        </span>
+
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#"></a></li>
+        <li *ngFor="let unit of units">
+          <a href="" onclick="return false;" (click)="filterUnit = unit" >{{unit.description}}</a>
+        </li>
+        <li>
+          <a href="" onclick="return false;" (click)="filterUnit = null">----</a>
+        </li>
       </ul>
     </div>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-lg-6 col-md-6">
     <span class="input-group full-width">
-      <input type="text" class="form-control" placeholder="Unit 1" [(ngModel)]="unitname">
+      <input type="text" class="form-control" placeholder="groß" [disabled]="!filterUnit" [(ngModel)]="word">
+    </span>
+  </div>
+  <div class="col-lg-6 col-md-6">
+    <span class="input-group full-width">
+      <input type="text" class="form-control" placeholder="big" [disabled]="!filterUnit" [(ngModel)]="foreignWord">
     </span>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <button class="btn btn-block btn-primary">Hinzufügen</button>
+    <button class="btn btn-block btn-primary" [disabled]="!filterUnit" (click)="addVocab()" )>Hinzufügen</button>
   </div>
 </div>
 
@@ -80,9 +150,9 @@
     <ul class="list-group">
       <li class="list-group-item list-group-item-heading">Vorhandene Vokabeln</li>
       <li class="list-group-item">
-        <div class="row">
+        <div class="row" *ngFor="let vocab of vocabs">
           <div class="col-md-8">
-            Lorem Ipsum
+            {{vocab.word.word}} - {{vocab.foreignWord.word}}
           </div>
           <div class="col-md-4" align="right">
             <button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</button>

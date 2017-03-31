@@ -189,3 +189,38 @@ exports.createUnit = function (unit, level, callback) {
 }
 
 //
+
+//CUD
+
+//Word
+
+exports.createWord = function(word, callback){
+    connection.query(mysql.format(queries.createWord, [word.language_id, word.word]), function(err, results, fields){
+        if(err) throw err;
+
+        connection.query(mysql.format(queries.findLastWord), callback);
+    });
+};
+
+//Vocab
+
+exports.createVocab = function (vocab, unit, callback) {
+    connection.query(mysql.format(queries.createVocab, [vocab.word_id, vocab.foreign_word_id]), function (err, results, fields) {
+        if(err) console.log(err);
+
+        connection.query(mysql.format(queries.findLastVocab), function (err, results, fields) {
+            if(err) console.log(err);
+            var responseResult = results;
+            var responseFields = fields;
+
+            if(responseResult && responseResult.length > 0){
+                connection.query(mysql.format(queries.createVocabUnitAssoc, [unit.id, results[0].id]), function (err, results, fields) {
+                    callback(err, responseResult, responseFields);
+                });
+            }else{
+                callback(err, results, fields);
+            }
+        });
+    });
+
+};

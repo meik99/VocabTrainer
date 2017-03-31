@@ -16,4 +16,17 @@ module.exports = function (app) {
             response.send([]);
         }
     });
-}
+
+    app.post(endpoints.vocabs, function (request, response) {
+        var vocab = request.body.vocab;
+        var unit = request.body.unit;
+        if(vocab && unit){
+            database.createVocab(vocab, unit, function (err, result, fields) {
+               if(err) response.send({});
+               else response.send(result);
+            });
+        }else{
+            response.send({});
+        }
+    });
+};

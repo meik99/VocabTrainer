@@ -127,8 +127,10 @@ export class ManageVocabsComponent implements OnInit {
     this._filterUnit = unit;
 
     if(unit){
+      this.vocabs = [];
       this.vocabService.findVocabsByUnit(unit)
         .then(vocabs => {
+
           for(let i = 0; i < vocabs.length; i++){
             this.wordService.findWordById(vocabs[i].word_id)
               .then(result => {
@@ -157,10 +159,33 @@ export class ManageVocabsComponent implements OnInit {
   }
 
   addVocab(){
-    if(this.word && this.foreignWord && this.word.length > 0 && this.foreignWord.length > 0){
+    if(this.filterUnit &&
+      this.word &&
+      this.foreignWord &&
+      this.word.length > 0 &&
+      this.foreignWord.length > 0 &&
+      this.filterLanguage &&
+      this.filterForeignLanguage){
+
       let newWord: Word = new Word(0, this.word, this.filterLanguage.id);
       let newForeignWord: Word = new Word(0, this.foreignWord, this.filterForeignLanguage.id);
 
+      this.wordService.createWord(newWord)
+        .then(result => {
+          newWord.id = result.id;
+          this.wordService.createWord(newForeignWord)
+            .then(result => {
+              newForeignWord.id = result.id;
+
+              let newVocab = new Vocab(0, newWord.id, newForeignWord.id);
+              console.log(newVocab);
+
+              this.vocabService.createVocab(newVocab, this.filterUnit)
+                .then(result => {
+                  this.filterUnit = this.filterUnit;
+                });
+            });
+        });
 
     }
   }

@@ -19,12 +19,16 @@
           "/vocabtrainer/api/units/schooltype",
   "unitByLevel":
           "/vocabtrainer/api/units/schoollevel",
+  "vocabs":
+  "/vocabtrainer/api/vocabs",
   "vocabsByUnitId":
-          "/vocabtrainer/api/vocabs/:unitId",
+  "/vocabtrainer/api/vocabs/:unitId",
+  "words":
+  "/vocabtrainer/api/words",
   "wordsByVocabId":
-          "/vocabtrainer/api/words/:vocabId",
+          "/vocabtrainer/api/words/vocab/:vocabId",
   "wordById":
-          "/vocabtrainer/api/word/:wordId",
+          "/vocabtrainer/api/words/:wordId",
   "login":
           "/vocabtrainer/api/administration/login",
   "loginAuthenticated":

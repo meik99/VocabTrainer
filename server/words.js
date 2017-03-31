@@ -34,4 +34,17 @@ module.exports = function (app) {
            response.send({});
        }
     });
+
+    app.post(endpoints.words, function (request, response) {
+        var word = request.body.word;
+        if(word){
+            database.createWord(word, function(err, results, fields){
+                console.log(results[0]);
+                if(err) response.send({});
+                else response.send(results[0]);
+            });
+        }else{
+            response.send({});
+        }
+    });
 };

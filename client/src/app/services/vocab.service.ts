@@ -20,4 +20,13 @@ export class VocabService extends BaseService{
       .catch(this.handleError);
   }
 
+  createVocab(vocab: Vocab, unit: Unit): Promise<Vocab>{
+    const requestUrl = `${this.URL_BASE}vocabs/`;
+
+    return this.http.post(requestUrl, {vocab: vocab, unit: unit}, this.requestOptions)
+      .toPromise()
+      .then(result => result.json() as Vocab)
+      .catch(this.handleError);
+  }
+
 }
